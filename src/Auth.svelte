@@ -3,11 +3,12 @@
         <button on:click={() => state = "Login"}>Login</button>
         <button on:click={() => state = "Register"}>Register</button>
     {:else}
-        <span>{$user.user_id}</span>
+        <span>{$user.username}</span>
     {/if}
 </div>
-{#if state && !{$jwt}}
+{#if state && !$jwt}
 <div class="auth-wrapper">
+    <span class="bt-close" on:click={() => state = ""}>X</span>
     <div class="auth-box">
         <input bind:value={username} type="text" placeholder="username" spellcheck="false"/>
         <input bind:value={password} type="password" placeholder="password" spellcheck="false"/>
@@ -78,14 +79,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Roboto", "Helvetica", sans-serif;
     z-index: 1;
+
+    .bt-close {
+        position: fixed;
+        top: 64px;
+        right: 36px;
+        padding: 12px;
+        color: $background-1;
+        font-weight: 700;
+        cursor: pointer;
+    }
 
     .auth-box {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 24px 48px;
-        font-family: "Roboto", "Helvetica", sans-serif;
 
         h1 {
             margin-top: 0;
