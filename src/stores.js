@@ -9,7 +9,8 @@ function createJwt() {
 		subscribe,
 		set: (jwt) => {
             set(jwt);
-            cookie.set("jwt", jwt);
+            if(jwt) cookie.set("jwt", jwt);
+            else cookie.remove("jwt");
         }
 	};
 }
