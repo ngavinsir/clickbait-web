@@ -1,23 +1,23 @@
-<div class="navbar">
+<div class="fixed top-0 bg-dark-8 w-screen p-4 flex justify-end z-20">
     {#if !$jwt}
-        <button on:click={() => state = "Login"}>Login</button>
-        <button on:click={() => state = "Register"}>Register</button>
+        <button class="mr-4 text-dark-2 hover:text-dark-1 outline-none" on:click={() => state = "Login"}>Login</button>
+        <button class="text-dark-2 hover:text-dark-1 outline-none" on:click={() => state = "Register"}>Register</button>
     {:else}
-        <span>{$user.username}</span>
+        <span class="text-dark-1 cursor-default">{$user.username}</span>
     {/if}
 </div>
 {#if state && !$jwt}
-<div class="auth-wrapper">
-    <span class="bt-close" on:click={() => state = ""}>X</span>
-    <div class="auth-box">
-        <input bind:value={username} type="text" placeholder="username" spellcheck="false"/>
-        <input bind:value={password} type="password" placeholder="password" spellcheck="false"/>
-        <button on:click={login}>{state}</button>
+<div class="fixed w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
+    <span class="fixed text-white bt-close cursor-pointer font-bold" on:click={() => state = ""}>X</span>
+    <div class="flex flex-col">
+        <input class="mb-4 w-64 shadow-md" bind:value={username} type="text" placeholder="username" spellcheck="false"/>
+        <input class="mb-6 w-64 shadow-md" bind:value={password} type="password" placeholder="password" spellcheck="false"/>
+        <button class="bt w-64" on:click={login}>
+            {state}
+        </button>
     </div>
 </div>
 {/if}
-
-
 
 <script>
     import axios from "axios";
@@ -41,92 +41,9 @@
     }
 </script>
 
-<style lang="scss">
-.navbar {
-    top: 0;
-    left: 0;
-    width: 100%;
-    position: fixed;
-    background-color: $background-8;
-    display: flex;
-    justify-content: flex-end;
-    z-index: 2;
-
-    > * {
-        margin: 12px;
-        background-color: transparent;
-        border: none;
-        font-family: "Roboto", "Helvetica", sans-serif !important;
-        font-size: 16px;
-        color: $background-5;
-        font-weight: 500;
-        cursor: pointer;
-        outline: none;
-
-        &:hover {
-            color: $background-3;
-        }
-    }
-}
-
-.auth-wrapper {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: $background-9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Roboto", "Helvetica", sans-serif;
-    z-index: 1;
-
-    .bt-close {
-        position: fixed;
-        top: 64px;
-        right: 36px;
-        padding: 12px;
-        color: $background-1;
-        font-weight: 700;
-        cursor: pointer;
-    }
-
-    .auth-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 24px 48px;
-
-        h1 {
-            margin-top: 0;
-            color: $background-1;
-            font-weight: 400;
-        }
-
-        input {
-            border: none;
-            padding: 12px 6px;
-            font-size: 16px;
-            width: 60vw;
-            max-width: 400px;
-            margin-bottom: 24px;
-            background-color: $background-7;
-            outline: none;
-            color: $background-3;
-        }
-
-        button {
-            width: 100%;
-            border: none;
-            outline: none;
-            background-color: $accent;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            color: $background-8;
-            cursor: pointer;
-        }
-    }
+<style>
+.bt-close {
+    top: 72px;
+    right: 36px;
 }
 </style>
