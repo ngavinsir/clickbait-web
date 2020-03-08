@@ -1,7 +1,4 @@
-<div 
-    transition:fade={{duration: 150}}
-    class={`flex items-center ${even ? "bg-dark-7 text-white" : "bg-dark-3 text-black"} rounded-lg shadow-xl px-4 py-4`}
->
+<div class={`flex items-center ${even ? "bg-dark-7 text-white" : "bg-dark-3 text-black"} rounded-lg shadow-xl px-4 py-4`}>
     <span class="value text-left w-full leading-none">{label.headline_value}</span>
     <span 
         class={`label w-full text-center font-bold leading-none text-${even ? "dark-1" : "dark-9"}`}
@@ -16,7 +13,6 @@
 <script>
     import axios from "axios";
     import { history, jwt } from "../stores.js";
-    import { fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
