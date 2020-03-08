@@ -63,19 +63,23 @@
 <div class="flex flex-col items-center w-full">
     {#if $jwt}
         <span class="headline leading-tight">{headline ? headline.value : "No headline"}</span>
-        <div class="flex content-around mt-8">
+        <div class="flex content-around mt-8 flex-wrap justify-center">
             <button 
-                class="bt white w-32 sm:w-40 m-2 sm:mx-6" 
+                class="bt white w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
                 on:click={() => sendLabel("NotClickbait")} 
                 disabled={!headline}
             >
                 Not Clickbait
             </button>
-            <button class="bt w-32 sm:w-40 m-2 sm:mx-6" on:click={() => sendLabel("Clickbait")} disabled={!headline}>
+            <button 
+                class="bt w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
+                on:click={() => sendLabel("Clickbait")} 
+                disabled={!headline}
+            >
                 Clickbait
             </button>
             <button 
-                class="w-16 m-2 sm:mx-6 text-white font-semibold text-base sm:text-lg hover:underline" 
+                class="w-16 m-2 sm:mx-6 text-white font-semibold text-base sm:text-lg hover:underline flex items-center justify-center" 
                 on:click={getHeadline} 
                 disabled={!headline}
             >

@@ -1,10 +1,10 @@
 {#if $jwt}
     <div class="fixed top-0 bg-dark-7 w-screen p-4 flex justify-end z-20 shadow-2xl">
         <div class="relative" on:mouseover={() => showDropdown = true} on:mouseout={() => showDropdown = false}>
-            <span class="text-dark-1 cursor-pointer">{$user.username}</span>
+            <span class="text-gray-100 cursor-pointer">{$user.username}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>
                 <button 
-                    class="w-full text-left px-4 py-2 text-dark-9 hover:text-accent-5" 
+                    class="w-full text-left px-4 py-2 text-dark-9 hover:text-accent-5 flex items-center" 
                     on:click={signout}
                 >
                     Sign out
@@ -15,14 +15,33 @@
 {:else if state}
     <div class="fixed w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
         <div class="flex flex-col">
-            <input class="mb-4 w-64 shadow-md" bind:value={username} type="text" placeholder="username" spellcheck="false"/>
-            <input class="mb-6 w-64 shadow-md" bind:value={password} type="password" placeholder="password" spellcheck="false"/>
-            <button class="bt w-64" on:click={isLogin ? login : register}>
+            {#if errorMessage}
+                <span class="mb-2 text-red-500 text-center">{errorMessage}</span>
+            {/if}
+            <input 
+                class="mb-4 w-64 shadow-md" 
+                bind:value={username} type="text" 
+                placeholder="username" 
+                spellcheck="false"
+                on:keydown={handleKeydown}
+            />
+            <input 
+                class="mb-6 w-64 shadow-md" 
+                bind:value={password} 
+                type="password" 
+                placeholder="password"
+                spellcheck="false"
+                on:keydown={handleKeydown}
+            />
+            <button class="bt w-64" on:click={isLogin ? login : register} disabled={loading}>
                 {state}
             </button>
             <span class="text-center mt-4 text-white font-semibold text-lg" >
                 or 
-                <span class="text-accent-5 cursor-pointer hover:underline" on:click={() => state = isLogin ? "Register" : "Login"}>
+                <span 
+                    class="text-accent-5 cursor-pointer hover:underline" 
+                    on:click={() => state = isLogin ? "Register" : "Login"}
+                >
                     {isLogin ? "Register" : "Login"}
                 </span>
             </span>
@@ -35,8 +54,10 @@
     import cookie from "js-cookie";
     import { jwt, user } from "../stores.js";
 
-    let state = "Register";
+    let state = "Login";
     let showDropdown = false;
+    let errorMessage = "";
+    let loading = false;
     let username = "";
     let password = "";
 
@@ -45,23 +66,52 @@
     $: isLogin = state === "Login"
 
     async function login() {
+        loading = true;
         const url = `${baseUrl}/login`;
         const data = { username, password };
-        const { data: token } = await axios.post(url, data)
-        $jwt = token;
-        showDropdown = false;
+        try {
+            const { data: token, data: { error } } = await axios.post(url, data)
+            if(!error) {
+                $jwt = token;
+                errorMessage = '';
+                showDropdown = false;
+            }
+            else errorMessage = error;
+        } catch (e) {
+            // handle login error
+        } finally {
+            loading = false;
+        }
     }
 
     async function register() {
+        loading = true;
         const url = `${baseUrl}/register`;
         const data = { username, password };
-        const { data: token } = await axios.post(url, data)
-        $jwt = token;
-        showDropdown = false;
+        try {
+            const { data: token, data: { error } } = await axios.post(url, data)
+            if(!error) {
+                $jwt = token;
+                errorMessage = '';
+                showDropdown = false;
+            }
+            else errorMessage = error;
+        } catch (e) {
+            // handle register error
+        } finally {
+            loading = false;
+        }
     }
 
     async function signout() {
         $jwt = "";
+    }
+
+    async function handleKeydown(event) {
+        if(event.keyCode === 13) {
+            if (isLogin) await login();
+            else await register();
+        }
     }
 </script>
 
