@@ -28,7 +28,7 @@
   }
 
   .white {
-    @apply bg-white;
+    @apply bg-gray-300;
   }
 
   .white:hover:enabled {

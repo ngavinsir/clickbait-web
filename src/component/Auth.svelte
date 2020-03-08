@@ -1,4 +1,4 @@
-<div class="fixed top-0 bg-dark-7 w-screen p-4 flex justify-end z-20">
+<div class="fixed top-0 bg-dark-7 w-screen p-4 flex justify-end z-20 shadow-2xl">
     {#if !$jwt}
         <button class="mr-4 text-dark-2 hover:text-dark-1 focus:outline-none" on:click={() => state = "Login"}>
             Login
