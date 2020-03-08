@@ -23,3 +23,19 @@ export const user = derived(
         else return {};
     }
 );
+
+function createHistory() {
+	const { subscribe, update, set } = writable([]);
+
+	return {
+        subscribe,
+        set,
+		add: (label) => {
+            update(history => [...history, label])
+        },
+        delete: (labelID) => {
+            update(history => history.filter(h => h.id !== labelID))
+        }
+	};
+}
+export const history = createHistory();

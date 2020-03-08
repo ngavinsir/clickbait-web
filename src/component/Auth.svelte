@@ -1,4 +1,4 @@
-<div class="fixed top-0 bg-dark-8 w-screen p-4 flex justify-end z-20">
+<div class="fixed top-0 bg-dark-7 w-screen p-4 flex justify-end z-20">
     {#if !$jwt}
         <button class="mr-4 text-dark-2 hover:text-dark-1 focus:outline-none" on:click={() => state = "Login"}>
             Login
@@ -45,7 +45,7 @@
 <script>
     import axios from "axios";
     import cookie from "js-cookie";
-    import { jwt, user } from "./stores.js";
+    import { jwt, user } from "../stores.js";
 
     let state;
     let showDropdown = false;

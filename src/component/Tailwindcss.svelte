@@ -10,12 +10,12 @@
   }
 
   .bt {
-    @apply bg-accent-5 rounded-lg py-2 text-dark-9 font-semibold text-base; 
+    @apply bg-accent-3 rounded-lg py-2 text-dark-9 font-semibold text-base; 
     @apply leading-tight align-middle shadow-md outline-none h-auto;
   }
 
   .bt:hover:enabled {
-    @apply bg-accent-7;
+    @apply bg-accent-5;
   }
 
   .bt:focus {
@@ -37,7 +37,7 @@
 
   @screen sm {
     .bt {
-      @apply text-lg leading-none;
+      @apply text-lg;
     }
   }
 
