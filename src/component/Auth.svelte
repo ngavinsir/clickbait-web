@@ -1,12 +1,5 @@
-<div class="fixed top-0 bg-dark-7 w-screen p-4 flex justify-end z-20 shadow-2xl">
-    {#if !$jwt}
-        <button class="mr-4 text-dark-2 hover:text-dark-1 focus:outline-none" on:click={() => state = "Login"}>
-            Login
-        </button>
-        <button class="text-dark-2 hover:text-dark-1 focus:outline-none" on:click={() => state = "Register"}>
-            Register
-        </button>
-    {:else}
+{#if $jwt}
+    <div class="fixed top-0 bg-dark-7 w-screen p-4 flex justify-end z-20 shadow-2xl">
         <div class="relative" on:mouseover={() => showDropdown = true} on:mouseout={() => showDropdown = false}>
             <span class="text-dark-1 cursor-pointer">{$user.username}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>
@@ -18,28 +11,23 @@
                 </button>
             </div>
         </div>
-    {/if}
-</div>
-{#if state && !$jwt}
-<div class="fixed w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
-    <svg 
-        class="fixed bt-close cursor-pointer" 
-        width="24" 
-        height="24" 
-        viewBox="0 0 24 24" 
-        xmlns="http://www.w3.org/2000/svg"
-        on:click={() => state = ""}
-    >
-        <path d="M6 18L18 6M6 6L18 18" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <div class="flex flex-col">
-        <input class="mb-4 w-64 shadow-md" bind:value={username} type="text" placeholder="username" spellcheck="false"/>
-        <input class="mb-6 w-64 shadow-md" bind:value={password} type="password" placeholder="password" spellcheck="false"/>
-        <button class="bt w-64" on:click={state === "Login" ? login : register}>
-            {state}
-        </button>
     </div>
-</div>
+{:else if state}
+    <div class="fixed w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
+        <div class="flex flex-col">
+            <input class="mb-4 w-64 shadow-md" bind:value={username} type="text" placeholder="username" spellcheck="false"/>
+            <input class="mb-6 w-64 shadow-md" bind:value={password} type="password" placeholder="password" spellcheck="false"/>
+            <button class="bt w-64" on:click={isLogin ? login : register}>
+                {state}
+            </button>
+            <span class="text-center mt-4 text-white font-semibold text-lg" >
+                or 
+                <span class="text-accent-5 cursor-pointer hover:underline" on:click={() => state = isLogin ? "Register" : "Login"}>
+                    {isLogin ? "Register" : "Login"}
+                </span>
+            </span>
+        </div>
+    </div>
 {/if}
 
 <script>
@@ -47,12 +35,14 @@
     import cookie from "js-cookie";
     import { jwt, user } from "../stores.js";
 
-    let state;
+    let state = "Register";
     let showDropdown = false;
     let username = "";
     let password = "";
 
     const baseUrl = "http://localhost:4040";
+
+    $: isLogin = state === "Login"
 
     async function login() {
         const url = `${baseUrl}/login`;
