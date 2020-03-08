@@ -1,3 +1,36 @@
+<div class="flex flex-col items-center w-full">
+    {#if $jwt}
+        <span class="headline leading-tight">{headline ? headline.value : "No headline"}</span>
+        <div class="flex content-around mt-8 flex-wrap justify-center">
+            <button 
+                class="bt white w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
+                on:click={() => sendLabel("NotClickbait")} 
+                disabled={!headline}
+            >
+                Not Clickbait
+            </button>
+            <button 
+                class="bt w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
+                on:click={() => sendLabel("Clickbait")} 
+                disabled={!headline}
+            >
+                Clickbait
+            </button>
+            <button 
+                class="w-16 m-2 sm:mx-6 text-white font-semibold text-base sm:text-lg hover:underline flex items-center justify-center" 
+                on:click={getHeadline} 
+                disabled={!headline}
+            >
+                Skip
+            </button>
+        </div>
+    {:else}
+        <h1 class="text-xl text-accent-5 font-semibold">login first</h1>
+    {/if}
+</div>
+
+<svelte:window on:keydown={handleKeydown}/>
+
 <script>
     import axios from "axios";
     import { jwt, history } from "../stores.js";
@@ -33,20 +66,20 @@
             value: label,
             headline_id: headline.id
         };
-        const { data: newHeadline, data: { error } } = await axios.post(url, data, {
+        const { data: { error, label_id, new_headline } } = await axios.post(url, data, {
             headers: {
                 Authorization: `Bearer ${$jwt}`
             }
         })
         if(!error)  { 
             history.add({ 
-                id: headline.id,
+                id: label_id,
                 headline_value: headline.value,
                 label_value: label,
                 label_updated_at: new Date().toISOString()
             })
         }
-        headline = !error ? newHeadline : null;
+        headline = new_headline;
     }
 
     async function handleKeydown(event) {
@@ -57,41 +90,6 @@
     }
 
 </script>
-
-<svelte:window on:keydown={handleKeydown}/>
-
-<div class="flex flex-col items-center w-full">
-    {#if $jwt}
-        <span class="headline leading-tight">{headline ? headline.value : "No headline"}</span>
-        <div class="flex content-around mt-8 flex-wrap justify-center">
-            <button 
-                class="bt white w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
-                on:click={() => sendLabel("NotClickbait")} 
-                disabled={!headline}
-            >
-                Not Clickbait
-            </button>
-            <button 
-                class="bt w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
-                on:click={() => sendLabel("Clickbait")} 
-                disabled={!headline}
-            >
-                Clickbait
-            </button>
-            <button 
-                class="w-16 m-2 sm:mx-6 text-white font-semibold text-base sm:text-lg hover:underline flex items-center justify-center" 
-                on:click={getHeadline} 
-                disabled={!headline}
-            >
-                Next
-            </button>
-        </div>
-    {:else}
-        <h1 class="text-xl text-accent-5 font-semibold">login first</h1>
-    {/if}
-</div>
-
-    
 
 <style type="text/postcss">
 .headline {
