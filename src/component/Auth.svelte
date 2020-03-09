@@ -14,9 +14,9 @@
     </div>
 {:else if state}
     <div class="fixed w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
-        <div class="flex flex-col">
+        <div class="flex flex-col items-center justify-center">
             {#if errorMessage}
-                <span class="mb-2 text-red-500 text-center">{errorMessage}</span>
+                <span class="mb-2 text-red-500 text-center max-w-xl">{errorMessage}</span>
             {/if}
             <input 
                 class="mb-4 w-64 shadow-md" 

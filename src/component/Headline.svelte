@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center w-full">
     {#if $jwt}
-        <span class="headline leading-tight">{headline ? headline.value : "No headline"}</span>
+        <span class="headline leading-tight font-serif">{headline ? headline.value : "No headline"}</span>
         <div class="flex content-around mt-8 flex-wrap justify-center">
             <button 
                 class="bt white w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
