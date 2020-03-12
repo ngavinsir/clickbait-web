@@ -11,7 +11,7 @@
 
   .bt {
     @apply bg-accent-3 rounded-lg py-2 text-dark-9 font-semibold text-base; 
-    @apply leading-tight align-middle shadow-md outline-none h-auto;
+    @apply leading-tight align-middle outline-none h-auto;
   }
 
   .bt:hover:enabled {
@@ -41,6 +41,14 @@
 
   .white:hover:enabled {
     @apply bg-dark-1;
+  }
+
+  .gray {
+    @apply bg-dark-7 text-gray-100;
+  }
+
+  .gray:hover:enabled {
+    @apply bg-dark-8;
   }
 
   .menu {

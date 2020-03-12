@@ -7,7 +7,7 @@
         Not Clickbait
     </button>
     <button 
-        class="bt red w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
+        class="bt gray w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
         on:click={() => sendLabel("Clickbait")} 
         disabled={!article}
     >
