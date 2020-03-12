@@ -1,7 +1,22 @@
-<span class="w-full headline leading-tight font-serif">{$article ? $article.headline : "No headline"}</span>
+<div class="flex flex-col items-center">
+  <span class="w-full headline leading-tight font-serif">{$article && $article.headline ? $article.headline : "No headline"}</span>
+  <span 
+    class="text-accent-3 my-4 font-bold text-sm cursor-pointer"
+    on:click={() => showContent = !showContent}
+  >
+    {`${showContent ? "HIDE" : "SHOW"} CONTENT`}
+  </span>
+  {#if showContent}
+    <div class="content-wrapper">
+      <p class="text-white mr-4">{$article && $article.content ? $article.content : "No content"}</p>
+    </div>
+  {/if}
+</div>
 
 <script>
     import { article, jwt } from "../stores.js";
+
+    let showContent = false;
 </script>
 
 <style type="text/postcss">
@@ -14,17 +29,8 @@
         @apply text-5xl;
     }
 }
-
-.rotate {
-  animation: rotation .2s infinite linear;
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
+.content-wrapper {
+  max-height: 35vh;
+  overflow-y: auto;
 }
 </style>

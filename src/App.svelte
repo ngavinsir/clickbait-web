@@ -31,7 +31,7 @@
 <main>
 	<div class="min-w-screen min-h-screen flex flex-col items-center">
 		<Auth />
-		<div class="flex flex-col items-center mt-24 w-11/12 max-w-4xl">
+		<div class="flex flex-col items-center mt-16 sm:mt-20 w-11/12 max-w-4xl">
 			<Article {type} />
 			<Clickbait {type} on:skip={() => getArticle("clickbait")}/>
 		</div>
