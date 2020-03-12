@@ -1,8 +1,8 @@
 import { writable, derived } from "svelte/store"
 import cookie from "js-cookie"
 
-export const baseUrl = "https://localhost:4040"
 export const jwt = createJwt();
+export const type = writable("clickbait");
 export const article = writable(null);
 export const history = createHistory();
 export const user = derived(

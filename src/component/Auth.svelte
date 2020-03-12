@@ -1,5 +1,22 @@
 {#if $jwt}
-    <div class="fixed top-0 bg-dark-7 w-screen p-4 flex justify-end z-20 shadow-2xl">
+    <div class="fixed top-0 bg-dark-7 w-screen p-4 flex items-center justify-between z-20 shadow-2xl">
+        <div class="relative" on:mouseover={() => showTypeDropdown = true} on:mouseout={() => showTypeDropdown = false}>
+            <span 
+                class="bg-dark-2 rounded-full text-dark-9 font-semibold cursor-pointer py-2 px-4 inline-block leading-none"
+            >
+                Preview
+            </span>
+            {#if showTypeDropdown}
+                <div class="w-32 pt-4 bg-dark-2 absolute rounded-lg shadow-xl py-2 left-0">
+                    <button 
+                        class="w-full text-left px-4 py-2 text-dark-9 hover:text-accent-5 flex items-center" 
+                        on:click={signout}
+                    >
+                        Sign out
+                    </button>
+                </div>
+            {/if}
+        </div>
         <div class="relative" on:mouseover={() => showDropdown = true} on:mouseout={() => showDropdown = false}>
             <span class="text-gray-100 cursor-pointer">{$user.username}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>
@@ -52,10 +69,11 @@
 <script>
     import axios from "axios";
     import cookie from "js-cookie";
-    import { jwt, user } from "../stores.js";
+    import { jwt, user, type } from "../stores.js";
 
     let state = "Login";
     let showDropdown = false;
+    let showTypeDropdown = false;
     let errorMessage = "";
     let loading = false;
     let username = "";

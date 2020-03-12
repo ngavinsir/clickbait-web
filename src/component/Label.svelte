@@ -12,7 +12,7 @@
 
 <script>
     import axios from "axios";
-    import { history, jwt } from "../stores.js";
+    import { history, jwt, type } from "../stores.js";
     import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();

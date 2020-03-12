@@ -5,12 +5,10 @@
 	import Clickbait from "./component/Clickbait.svelte";
 	import Tailwindcss from './component/Tailwindcss.svelte';
 	import History from "./component/History.svelte";
-	import { article, jwt } from "./stores.js";
+	import { article, jwt, type } from "./stores.js";
 	import config from "./config.js";
 
-    let type = "clickbait";
-
-    $: getArticle(type);
+    $: getArticle($type);
 
     export async function getArticle(type) {
 		if(!$jwt) return;
@@ -31,12 +29,12 @@
 <main>
 	<div class="min-w-screen min-h-screen flex flex-col items-center">
 		<Auth />
-		<div class="flex flex-col items-center mt-16 sm:mt-20 w-11/12 max-w-4xl">
-			<Article {type} />
-			<Clickbait {type} on:skip={() => getArticle("clickbait")}/>
+		<div class="flex flex-col items-center mt-20 w-11/12 max-w-4xl">
+			<Article on:skip={() => getArticle("clickbait")}/>
+			<Clickbait />
 		</div>
 		<div class="mt-24 w-11/12 max-w-screen-md">
-			<History {type}/>
+			<History />
 		</div>
 	</div>
 
