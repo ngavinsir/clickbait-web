@@ -27,12 +27,24 @@
     cursor: default;
   }
 
+  .red {
+    @apply bg-red-300 text-red-900;
+  }
+
+  .red:hover:enabled {
+    @apply bg-red-400;
+  }
+
   .white {
     @apply bg-gray-300;
   }
 
   .white:hover:enabled {
     @apply bg-dark-1;
+  }
+
+  .menu {
+    @apply rounded-lg text-accent-3 font-semibold cursor-pointer py-2 px-4 inline-block leading-none;
   }
 
   @screen sm {

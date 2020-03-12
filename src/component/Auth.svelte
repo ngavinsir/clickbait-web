@@ -1,23 +1,18 @@
 {#if $jwt}
-    <div class="fixed top-0 bg-dark-7 w-screen p-4 flex items-center justify-between z-20 shadow-2xl">
-        <div class="relative" on:mouseover={() => showTypeDropdown = true} on:mouseout={() => showTypeDropdown = false}>
-            <span 
-                class="bg-dark-2 rounded-full text-dark-9 font-semibold cursor-pointer py-2 px-4 inline-block leading-none"
-            >
-                Preview
-            </span>
-            {#if showTypeDropdown}
-                <div class="w-32 pt-4 bg-dark-2 absolute rounded-lg shadow-xl py-2 left-0">
-                    <button 
-                        class="w-full text-left px-4 py-2 text-dark-9 hover:text-accent-5 flex items-center" 
-                        on:click={signout}
-                    >
-                        Sign out
-                    </button>
-                </div>
-            {/if}
-        </div>
-        <div class="relative" on:mouseover={() => showDropdown = true} on:mouseout={() => showDropdown = false}>
+    <div class="fixed top-0 bg-dark-7 w-screen p-4 flex items-center z-20 shadow-2xl">
+        <span 
+            class={$type == "clickbait" ? "menu bg-accent-3 text-dark-9" : "menu"}
+            on:click={() => $type = "clickbait"}
+        >
+            Clickbait
+        </span>
+        <span 
+            class={$type == "summary" ? "menu bg-accent-3 text-dark-9 ml-4" : "menu ml-4"}
+            on:click={() => $type = "summary"}
+        >
+            Summary
+        </span>
+        <div class="relative ml-auto" on:mouseover={() => showDropdown = true} on:mouseout={() => showDropdown = false}>
             <span class="text-gray-100 cursor-pointer">{$user.username}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>
                 <button 
@@ -134,11 +129,6 @@
 </script>
 
 <style type="text/postcss">
-.bt-close {
-    top: 72px;
-    right: 30px;
-}
-
 .dropdown-wrapper {
     @apply w-32 pt-2 bg-dark-5 absolute right-0 rounded-lg shadow-xl py-2;
 }
