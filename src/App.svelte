@@ -31,7 +31,9 @@
 		<Auth />
 		<div class="flex flex-col items-center mt-20 w-11/12 max-w-4xl">
 			<Article on:skip={() => getArticle("clickbait")}/>
-			<Clickbait />
+			{#if $type == "clickbait"}
+				<Clickbait />
+			{/if}
 		</div>
 		<div class="mt-24 w-11/12 max-w-screen-md">
 			<History />
