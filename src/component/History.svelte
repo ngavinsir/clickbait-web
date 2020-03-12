@@ -1,7 +1,7 @@
 <div class="flex flex-col">
     {#each sortedHistories as history,i (history.id)}
         <div animate:flip={{duration:150}} transition:fade={{duration: 150}} class="mb-4 last:mb-0">
-            <Label label={history} even={i%2 === 0} on:delete={e => deleteLabel(e.detail)}/>
+            <Label {type} label={history} even={i%2 === 0} on:delete={e => deleteLabel(e.detail)}/>
         </div>
     {/each}
 </div>
@@ -10,21 +10,22 @@
 
 <script>
     import _ from "lodash";
-    import { onMount } from 'svelte';
     import axios from "axios";
     import Label from "./Label.svelte";
     import { history, jwt } from "../stores.js";
     import { fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';
 
-    $: getHistories($jwt);
+    export let type;
+
+    $: getHistories(type);
     $: sortedHistories = _.sortBy($history, function(label) {
             return Date.parse(label.label_updated_at); 
         }).reverse();
 
-    async function getHistories(jwt) {
+    async function getHistories(type) {
         if(!$jwt) return;
-        const url = `http://localhost:4040/label`;
+        const url = `http://localhost:4040/label/${type}`;
         const { data: histories, data: { error } } = await axios.get(url, {
             headers: {
                 Authorization: `Bearer ${$jwt}`
@@ -34,7 +35,7 @@
     }
 
     async function deleteLabel(labelID) {
-        const url = `http://localhost:4040/label/${labelID}`
+        const url = `http://localhost:4040/label/${type}/${labelID}`
         const { data: { error }} = await axios.delete(url, {
             headers: {
                 Authorization: `Bearer ${$jwt}`

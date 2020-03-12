@@ -1,6 +1,18 @@
 import { writable, derived } from "svelte/store"
 import cookie from "js-cookie"
 
+export const baseUrl = "https://localhost:4040"
+export const jwt = createJwt();
+export const article = writable(null);
+export const history = createHistory();
+export const user = derived(
+	jwt,
+	$jwt => { 
+        if($jwt) return JSON.parse(window.atob($jwt.split(".")[1]));
+        else return {};
+    }
+);
+
 function createJwt() {
     const jwtExist = cookie.get("jwt") !== undefined && cookie.get("jwt");
 	const { subscribe, set } = writable(jwtExist ? cookie.get("jwt") : "");
@@ -14,15 +26,6 @@ function createJwt() {
         }
 	};
 }
-export const jwt = createJwt();
-
-export const user = derived(
-	jwt,
-	$jwt => { 
-        if($jwt) return JSON.parse(window.atob($jwt.split(".")[1]));
-        else return {};
-    }
-);
 
 function createHistory() {
 	const { subscribe, update, set } = writable([]);
@@ -38,4 +41,3 @@ function createHistory() {
         }
 	};
 }
-export const history = createHistory();

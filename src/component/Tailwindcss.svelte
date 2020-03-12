@@ -15,7 +15,7 @@
   }
 
   .bt:hover:enabled {
-    @apply bg-accent-5;
+    @apply bg-accent-7;
   }
 
   .bt:focus {
