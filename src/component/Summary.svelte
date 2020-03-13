@@ -67,10 +67,12 @@
             if(!error)  {
                 selected = [];
                 history.add({ 
-                    id: label_id,
+                    label: {
+                        id: label_id,
+                        value: label,
+                        updated_at: new Date().toISOString()
+                    },
                     article: $article,
-                    label_value: summary,
-                    label_updated_at: new Date().toISOString()
                 })
                 $article = new_article;
             }

@@ -2,7 +2,7 @@
     {#each sortedHistories as history,i (history.label.id)}
         <div animate:flip={{duration:150}} transition:fade={{duration: 150}} class="mb-4 last:mb-0">
             {#if $type == "clickbait"}
-                <Label label={history} even={i%2 === 0} on:delete={e => deleteLabel(e.detail)}/>
+                <ClickbaitLabel data={history} on:delete={e => deleteLabel(e.detail)}/>
             {/if}
         </div>
     {/each}
@@ -13,7 +13,7 @@
 <script>
     import _ from "lodash";
     import axios from "axios";
-    import Label from "./Label.svelte";
+    import ClickbaitLabel from "./label/Clickbait.svelte";
     import { history, jwt, type } from "../stores.js";
     import { fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';

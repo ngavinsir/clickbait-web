@@ -39,10 +39,12 @@
             })
             if(!error)  { 
                 history.add({ 
-                    id: label_id,
+                    label: {
+                        id: label_id,
+                        value: label,
+                        updated_at: new Date().toISOString()
+                    },
                     article: $article,
-                    label_value: label,
-                    label_updated_at: new Date().toISOString()
                 })
                 $article = new_article;
             }
