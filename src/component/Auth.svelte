@@ -1,5 +1,5 @@
 {#if $jwt}
-    <div class="fixed top-0 bg-dark-7 w-screen p-4 flex items-center z-20 shadow-2xl">
+    <div class="fixed top-0 bg-dark-8 border-b-2 border-dark-7 w-screen p-4 px-6 flex items-center z-20 shadow-2xl">
         <span 
             class={$type == "clickbait" ? "menu bg-accent-3 text-dark-9" : "menu"}
             on:click={() => $type = "clickbait"}

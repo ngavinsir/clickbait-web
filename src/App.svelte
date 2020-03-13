@@ -9,11 +9,11 @@
 	import { article, jwt, type } from "./stores.js";
 	import config from "./config.js";
 
-    $: getArticle($type);
+    $: getArticle($jwt);
 
-    export async function getArticle(type) {
+    export async function getArticle(jwt) {
 		if(!$jwt) return;
-        const url = `${config.baseUrl}/article/random/${type}`;
+        const url = `${config.baseUrl}/article/random/${$type}`;
         try {
             const { data, data: { error } } = await axios.get(url, {
                 headers: {
