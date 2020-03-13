@@ -55,6 +55,16 @@
     @apply rounded-lg text-accent-3 font-semibold cursor-pointer py-2 px-4 inline-block leading-none;
   }
 
+  .sentence {
+    @apply flex mb-4 rounded-lg bg-dark-7 p-4 w-full cursor-pointer shadow-2xl;
+  }
+  .sentence:hover {
+      @apply bg-dark-8;
+  }
+  .sentence:last-child {
+      @apply mb-0;
+  }
+
   @screen sm {
     .bt {
       @apply text-lg;

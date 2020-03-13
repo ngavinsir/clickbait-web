@@ -30,6 +30,6 @@ module.exports = {
       placeholderColor: customColor
     }
   },
-  variants: ['responsive', 'hover', 'focus', 'group-hover', 'even'],
+  variants: ['responsive', 'hover', 'focus', 'group-hover', 'even', 'last'],
   plugins: [],
 }

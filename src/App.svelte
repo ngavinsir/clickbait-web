@@ -3,6 +3,7 @@
 	import Auth from "./component/Auth.svelte";
 	import Article from "./component/Article.svelte";
 	import Clickbait from "./component/Clickbait.svelte";
+	import Summary from "./component/Summary.svelte";
 	import Tailwindcss from './component/Tailwindcss.svelte';
 	import History from "./component/History.svelte";
 	import { article, jwt, type } from "./stores.js";
@@ -33,6 +34,8 @@
 			<Article on:skip={() => getArticle("clickbait")}/>
 			{#if $type == "clickbait"}
 				<Clickbait />
+			{:else if $type == "summary"}
+				<Summary />
 			{/if}
 		</div>
 		<div class="mt-24 w-11/12 max-w-screen-md">
