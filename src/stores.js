@@ -37,7 +37,7 @@ function createHistory() {
             update(history => [...history, label])
         },
         delete: (labelID) => {
-            update(history => history.filter(h => h.id !== labelID))
+            update(history => history.filter(h => h.label.id !== labelID))
         }
 	};
 }
