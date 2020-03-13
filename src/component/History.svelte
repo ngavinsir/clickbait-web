@@ -1,4 +1,4 @@
-<div class="flex flex-col">
+<div class="flex flex-col pb-32">
     {#each sortedHistories as history,i (history.id)}
         <div animate:flip={{duration:150}} transition:fade={{duration: 150}} class="mb-4 last:mb-0">
             <Label label={history} even={i%2 === 0} on:delete={e => deleteLabel(e.detail)}/>

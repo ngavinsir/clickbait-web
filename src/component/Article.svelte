@@ -21,6 +21,8 @@
   {/if}
 </div>
 
+<svelte:window on:keydown={handleKeydown}/>
+
 <script>
     import { article, jwt, type } from "../stores.js";
     import { createEventDispatcher } from 'svelte';
@@ -28,6 +30,11 @@
     const dispatch = createEventDispatcher();
 
     let showContent = false;
+
+    async function handleKeydown(event) {
+      if(event.keyCode === 13) await dispatch("skip");
+      else return;
+    }
 </script>
 
 <style type="text/postcss">

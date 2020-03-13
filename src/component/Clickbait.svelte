@@ -47,7 +47,6 @@
     async function handleKeydown(event) {
         if(event.keyCode === 65) await sendLabel("NotClickbait");
         else if(event.keyCode === 76) await sendLabel("Clickbait");
-        else if(event.keyCode === 13) await getHeadline();
         else return;
     }
 </script>
