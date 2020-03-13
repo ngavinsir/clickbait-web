@@ -1,6 +1,6 @@
-<div class="flex content-around mt-8 flex-wrap justify-center">
+<div class="footer">
     <button 
-        class="bt gray w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
+        class="bt gray hover:bg-dark-5 w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
         on:click={() => sendLabel("NotClickbait")} 
         disabled={!article}
     >

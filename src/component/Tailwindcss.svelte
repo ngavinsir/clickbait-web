@@ -48,7 +48,7 @@
   }
 
   .gray:hover:enabled {
-    @apply bg-dark-8;
+    @apply bg-dark-6;
   }
 
   .menu {
@@ -70,7 +70,7 @@
   }
 
   .footer {
-    @apply fixed bottom-0 border-t-2 border-dark-7 bg-dark-8 w-screen p-4 flex items-center justify-end z-20;
+    @apply fixed bottom-0 border-t-2 border-dark-7 bg-dark-8 w-screen py-2 px-4 flex items-center justify-end z-20;
   }
 
   @screen sm {
@@ -81,7 +81,7 @@
       @apply p-4;
     }
     .footer {
-      @apply px-6;
+      @apply py-4 px-6;
     }
   }
 

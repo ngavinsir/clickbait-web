@@ -38,7 +38,7 @@
 				<Summary />
 			{/if}
 		</div>
-		<div class="mt-24 w-11/12 max-w-screen-md">
+		<div class="mt-8 w-11/12 max-w-screen-md">
 			<History />
 		</div>
 	</div>

@@ -31,6 +31,5 @@
 svg {
     flex: 1;
     max-width: 24px;
-    align-self: flex-end;
 }
 </style>
