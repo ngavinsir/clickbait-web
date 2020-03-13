@@ -1,7 +1,9 @@
 <div class="flex flex-col pb-32">
-    {#each sortedHistories as history,i (history.id)}
+    {#each sortedHistories as history,i (history.label.id)}
         <div animate:flip={{duration:150}} transition:fade={{duration: 150}} class="mb-4 last:mb-0">
-            <Label label={history} even={i%2 === 0} on:delete={e => deleteLabel(e.detail)}/>
+            {#if $type == "clickbait"}
+                <Label label={history} even={i%2 === 0} on:delete={e => deleteLabel(e.detail)}/>
+            {/if}
         </div>
     {/each}
 </div>
@@ -18,18 +20,19 @@
 
     $: getHistories($type);
     $: sortedHistories = _.sortBy($history, function(label) {
-            return Date.parse(label.label_updated_at); 
+            return Date.parse(label.label.updated_at); 
         }).reverse();
 
     async function getHistories(type) {
         if(!$jwt) return;
+        $history = [];
         const url = `http://localhost:4040/label/${type}`;
         const { data: histories, data: { error } } = await axios.get(url, {
             headers: {
                 Authorization: `Bearer ${$jwt}`
             }
         });
-        if(!error) history.set(histories);
+        if(!error) $history = histories;
     }
 
     async function deleteLabel(labelID) {
