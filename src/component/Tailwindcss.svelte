@@ -55,6 +55,10 @@
     @apply rounded-lg text-accent-3 font-semibold cursor-pointer py-2 px-4 inline-block leading-none;
   }
 
+  .numbering {
+    @apply w-6 h-6 flex items-center justify-center text-xs font-bold rounded-full bg-accent-7 text-white flex-shrink-0;
+  }
+
   .sentence {
     @apply flex mb-4 rounded-lg bg-dark-7 p-4 w-full cursor-pointer shadow-2xl;
   }
