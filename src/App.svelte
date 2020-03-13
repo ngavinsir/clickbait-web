@@ -1,5 +1,6 @@
 <script>
 	import axios from "axios";
+	import Modal from 'svelte-simple-modal';
 	import Auth from "./component/Auth.svelte";
 	import Article from "./component/Article.svelte";
 	import Clickbait from "./component/Clickbait.svelte";
@@ -22,26 +23,29 @@
             })
             $article = !error ? data : null;
         } catch (e) {
+			console.log(e);
             // handle get article error
         }
     }
 </script>
 
-<main>
-	<div class="min-w-screen min-h-screen flex flex-col items-center">
-		<Auth />
-		<div class="flex flex-col items-center mt-20 w-11/12 max-w-4xl">
-			<Article on:skip={() => getArticle("clickbait")}/>
-			{#if $type == "clickbait"}
-				<Clickbait />
-			{:else if $type == "summary"}
-				<Summary />
-			{/if}
+<Modal>
+	<main>
+		<div class="min-w-screen min-h-screen flex flex-col items-center">
+			<Auth />
+			<div class="flex flex-col items-center mt-20 w-11/12 max-w-4xl">
+				<Article on:skip={() => getArticle("clickbait")}/>
+				{#if $type == "clickbait"}
+					<Clickbait />
+				{:else if $type == "summary"}
+					<Summary />
+				{/if}
+			</div>
+			<div class="mt-8 w-11/12 max-w-screen-md">
+				<History />
+			</div>
 		</div>
-		<div class="mt-8 w-11/12 max-w-screen-md">
-			<History />
-		</div>
-	</div>
 
-	<Tailwindcss />
-</main>
+		<Tailwindcss />
+	</main>
+</Modal>
