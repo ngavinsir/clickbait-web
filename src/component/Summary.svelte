@@ -13,7 +13,7 @@
 </div>
 
 {#if selected.length}
-    <div class="fixed bottom-0 border-t-2 border-dark-7 bg-dark-8 w-screen p-4 sm:px-6 flex items-center justify-end z-20">
+    <div class="footer">
         <span class="text-white sm:ml-4 mr-auto text-sm sm:text-base">{selected.length} selected</span>
         <span 
             class="text-white mr-4 font-bold text-sm cursor-pointer"

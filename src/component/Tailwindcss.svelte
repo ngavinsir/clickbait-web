@@ -69,12 +69,19 @@
       @apply mb-0;
   }
 
+  .footer {
+    @apply fixed bottom-0 border-t-2 border-dark-7 bg-dark-8 w-screen p-4 flex items-center justify-end z-20;
+  }
+
   @screen sm {
     .bt {
       @apply text-lg;
     }
     .sentence {
       @apply p-4;
+    }
+    .footer {
+      @apply px-6;
     }
   }
 
