@@ -9,7 +9,7 @@
     </span>
     <span 
       class="text-white ml-8 my-4 font-bold text-sm cursor-pointer"
-      on:click={() => dispatch("skip")} 
+      on:click={getArticle} 
     >
       SKIP
     </span>
@@ -24,16 +24,36 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <script>
+    import axios from "axios";
     import { article, jwt, type } from "../stores.js";
     import { createEventDispatcher } from 'svelte';
+    import config from "../config.js";
 
     const dispatch = createEventDispatcher();
 
     let showContent = false;
 
+    $: getArticle($jwt);
+
     async function handleKeydown(event) {
       if(event.keyCode === 13) await dispatch("skip");
       else return;
+    }
+
+    async function getArticle(jwt) {
+      if(!$jwt) return;
+      const url = `${config.baseUrl}/article/random/${$type}`;
+      try {
+          const { data, data: { error } } = await axios.get(url, {
+              headers: {
+                  Authorization: `Bearer ${$jwt}`
+              }
+          })
+          $article = !error ? data : null;
+      } catch (e) {
+          console.log(e);
+          // handle get article error
+      }
     }
 </script>
 
