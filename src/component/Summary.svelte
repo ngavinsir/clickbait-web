@@ -7,7 +7,7 @@
             <span class={selected.includes(i) ? "numbering bg-blue-500" : "numbering"}>
                 {selected.includes(i) ? selected.indexOf(i)+1 : i+1}
             </span>
-            <span class="ml-4 text-gray-100 text-lg">{sentence}</span>
+            <span class="ml-4 text-gray-100 sm:text-lg">{sentence}</span>
         </div>
     {/each}
 </div>

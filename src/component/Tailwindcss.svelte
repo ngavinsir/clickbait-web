@@ -60,7 +60,7 @@
   }
 
   .sentence {
-    @apply flex mb-4 rounded-lg bg-dark-7 p-4 w-full cursor-pointer shadow-2xl;
+    @apply flex mb-4 rounded-lg bg-dark-7 p-2 w-full cursor-pointer shadow-2xl;
   }
   .sentence:hover {
       @apply bg-dark-8;
@@ -72,6 +72,9 @@
   @screen sm {
     .bt {
       @apply text-lg;
+    }
+    .sentence {
+      @apply p-4;
     }
   }
 
