@@ -49,6 +49,7 @@
                 $article = new_article;
             }
         } catch (e) {
+            console.log(e);
             // handle send label error
         } finally {
             loading = false;

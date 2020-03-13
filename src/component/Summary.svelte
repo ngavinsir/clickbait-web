@@ -69,7 +69,7 @@
                 history.add({ 
                     label: {
                         id: label_id,
-                        value: label,
+                        value: summary,
                         updated_at: new Date().toISOString()
                     },
                     article: $article,
@@ -77,6 +77,7 @@
                 $article = new_article;
             }
         } catch (e) {
+            console.log(e);
             // handle label summary error
         } finally {
             loading = false;

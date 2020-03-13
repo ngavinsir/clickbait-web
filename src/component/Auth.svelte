@@ -91,6 +91,7 @@
             }
             else errorMessage = error;
         } catch (e) {
+            console.log(e);
             // handle login error
         } finally {
             loading = false;
@@ -110,6 +111,7 @@
             }
             else errorMessage = error;
         } catch (e) {
+            console.log(e);
             // handle register error
         } finally {
             loading = false;
