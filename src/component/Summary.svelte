@@ -1,4 +1,7 @@
-<div class="flex flex-col items-center w-full max-w-screen-md mt-8">
+<div class="flex flex-col items-center w-full max-w-screen-md">
+    {#if sentences.length}
+        <span class="text-white text-sm sm:text-base self-end mr-2 mb-2 mt-8">{sentences.length} sentences</span>
+    {/if}
     {#each sentences as sentence, i (i)}
         <div 
             class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 hover:bg-dark-8" : "sentence border-2 border-transparent"}
