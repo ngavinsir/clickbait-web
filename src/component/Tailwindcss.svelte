@@ -23,7 +23,7 @@
   }
 
   .bt:disabled {
-    opacity: .2;
+    opacity: .7;
     cursor: default;
   }
 
