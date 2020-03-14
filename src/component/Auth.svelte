@@ -48,7 +48,7 @@
             <Bt
                 bind:this={bt}
                 customClass="w-64" 
-                onClick={isLogin ? login : register}
+                on:click={isLogin ? login : register}
                 {loading}
                 spinnerColor="#000"
                 disabled={loading}
