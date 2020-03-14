@@ -62,9 +62,11 @@
 {/if}
 
 <script>
-    import axios from "axios";
+    import { getContext } from "svelte";
     import cookie from "js-cookie";
     import { jwt, user, type } from "../stores.js";
+
+    const { axios } = getContext("axios");
 
     let state = "Login";
     let showDropdown = false;
@@ -74,13 +76,11 @@
     let username = "";
     let password = "";
 
-    const baseUrl = "http://localhost:4040";
-
     $: isLogin = state === "Login"
 
     async function login() {
         loading = true;
-        const url = `${baseUrl}/login`;
+        const url = `/login`;
         const data = { username, password };
         try {
             const { data: token, data: { error } } = await axios.post(url, data)
@@ -100,7 +100,7 @@
 
     async function register() {
         loading = true;
-        const url = `${baseUrl}/register`;
+        const url = `/register`;
         const data = { username, password };
         try {
             const { data: token, data: { error } } = await axios.post(url, data)

@@ -1,5 +1,6 @@
 <script>
 	import Modal from 'svelte-simple-modal';
+	import Axios from "./component/Axios.svelte";
 	import Auth from "./component/Auth.svelte";
 	import Article from "./component/Article.svelte";
 	import Clickbait from "./component/Clickbait.svelte";
@@ -9,7 +10,7 @@
 	import { jwt, type } from "./stores.js";
 </script>
 
-<Modal>
+<Modal><Axios>
 	<main>
 		<div class="min-w-screen min-h-screen flex flex-col items-center">
 			<Auth />
@@ -30,4 +31,4 @@
 
 		<Tailwindcss />
 	</main>
-</Modal>
+</Axios></Modal>

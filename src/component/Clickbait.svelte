@@ -18,26 +18,22 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <script>
-    import axios from "axios";
-    import { jwt, history, article } from "../stores.js";
-    import config from "../config.js";
+    import { getContext } from "svelte";
+    import { history, article } from "../stores.js";
     import { fly } from "svelte/transition";
 
+    const { axios } = getContext("axios");
     let loading = false;
 
     async function sendLabel(label) {
         loading = true;
-        const url = `${config.baseUrl}/labeling/clickbait`;
+        const url = `/labeling/clickbait`;
         const data = {
             value: label,
             article_id: $article.id
         };
         try {
-            const { data: { error, label_id, new_article } } = await axios.post(url, data, {
-                headers: {
-                    Authorization: `Bearer ${$jwt}`
-                }
-            })
+            const { data: { error, label_id, new_article } } = await axios.post(url, data)
             if(!error)  { 
                 history.add({ 
                     label: {

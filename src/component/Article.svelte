@@ -35,13 +35,12 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <script>
-    import axios from "axios";
-    import { article, jwt, type } from "../stores.js";
+    import { article, type, jwt } from "../stores.js";
     import { createEventDispatcher } from 'svelte';
     import { fly } from "svelte/transition";
-    import { tick, beforeUpdate } from 'svelte';
-    import config from "../config.js";
+    import { tick, beforeUpdate, getContext } from 'svelte';
 
+    const { axios } = getContext("axios");
     const dispatch = createEventDispatcher();
 
     let showContent = false;
@@ -64,13 +63,9 @@
 
     async function getArticle(jwt) {
       if(!$jwt) return;
-      const url = `${config.baseUrl}/article/random/${$type}`;
+      const url = `/article/random/${$type}`;
       try {
-          const { data, data: { error } } = await axios.get(url, {
-              headers: {
-                  Authorization: `Bearer ${$jwt}`
-              }
-          })
+          const { data, data: { error } } = await axios.get(url);
           $article = !error ? data : null;
       } catch (e) {
           console.log(e);

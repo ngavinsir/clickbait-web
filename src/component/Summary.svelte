@@ -43,11 +43,11 @@
 {/if}
 
 <script>
-    import axios from "axios";
-    import { article, jwt, history } from "../stores.js";
-    import config from "../config.js";
+    import { article, history } from "../stores.js";
     import { fly } from "svelte/transition";
-    import { tick } from 'svelte';
+    import { tick, getContext } from 'svelte';
+
+    const { axios } = getContext("axios");
 
     let selected = [];
     let sentences = [];
@@ -72,17 +72,13 @@
     async function submit() {
         loading = true;
         const summary = selected.map(i => sentences[i]).join(" ");
-        const url = `${config.baseUrl}/labeling/summary`;
+        const url = `/labeling/summary`;
         const data = {
             value: summary,
             article_id: $article.id
         };
         try {
-            const { data: { error, label_id, new_article } } = await axios.post(url, data, {
-                headers: {
-                    Authorization: `Bearer ${$jwt}`
-                }
-            })
+            const { data: { error, label_id, new_article } } = await axios.post(url, data)
             if(!error)  {
                 selected = [];
                 history.add({ 
