@@ -1,20 +1,18 @@
-{#if sortedHistories.length}
-    <div class="flex flex-col pb-32">
-        {#each sortedHistories as history,i (history.label.id)}
-            <div 
-                in:fly={{duration:150, y:50}}
-                out:fly={{duration:150, y:50}}
-                animate:flip={{duration:150}} class="mb-4 last:mb-0">
-                <svelte:component 
-                    this={labelComponent} 
-                    data={history} 
-                    on:delete={e => deleteLabel(e.detail)}
-                    deleting={deleting.includes(history.label.id)}
-                />
-            </div>
-        {/each}
-    </div>
-{/if}
+<div class="flex flex-col pb-32">
+    {#each sortedHistories as history,i (history.label.id)}
+        <div 
+            in:fly={{duration:150, y:50}}
+            out:fly={{duration:150, y:50}}
+            animate:flip={{duration:150}} class="mb-4 last:mb-0">
+            <svelte:component 
+                this={labelComponent} 
+                data={history} 
+                on:delete={e => deleteLabel(e.detail)}
+                deleting={deleting.includes(history.label.id)}
+            />
+        </div>
+    {/each}
+</div>
 
 <svelte:window on:keydown={handleKeydown}/>
 
