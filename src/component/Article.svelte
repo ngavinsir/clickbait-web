@@ -29,6 +29,9 @@
   {/if}
 </div>
 
+<svelte:head>
+    <title>{headline}</title>
+</svelte:head>
 <svelte:window on:keydown={handleKeydown}/>
 
 <script>
