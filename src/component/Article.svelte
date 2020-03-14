@@ -1,8 +1,20 @@
 <div class="flex flex-col items-center">
   {#if headline && renderHeadline}
-    <span class="w-full headline leading-tight font-serif">
-      {headline}
-    </span>
+    {#if loading}
+      <div class="py-4">
+        <Spinner  
+          size="50"
+          speed="750"
+          color="#41da8f"
+          thickness="3"
+          gap="40"
+        />
+      </div>
+    {:else}
+      <span class="w-full headline leading-tight font-serif">
+        {headline}
+      </span>
+    {/if}
   {/if}
   <div class="flex">
     <span 
@@ -31,6 +43,7 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <script>
+    import Spinner from 'svelte-spinner';
     import { article, type, jwt } from "../stores.js";
     import { createEventDispatcher } from 'svelte';
     import { tick, beforeUpdate, getContext } from 'svelte';
@@ -41,6 +54,7 @@
     let showContent = false;
     let renderHeadline = true;
     let headline;
+    let loading = false;
 
     $: getArticle($jwt);
     $: updateArticle($article);
@@ -58,6 +72,7 @@
 
     async function getArticle(jwt) {
       if(!$jwt) return;
+      loading = true;
       const url = `/article/random/${$type}`;
       try {
           const { data, data: { error } } = await axios.get(url);
@@ -65,6 +80,8 @@
       } catch (e) {
           console.log(e);
           // handle get article error
+      } finally {
+        loading = false;
       }
     }
 </script>
