@@ -1,10 +1,6 @@
 <div class="flex flex-col items-center">
   {#if headline && renderHeadline}
-    <span 
-      out:fly={{duration: 150, x:50}} 
-      in:fly={{duration: 150, x:50}} 
-      class="w-full headline leading-tight font-serif"
-    >
+    <span class="w-full headline leading-tight font-serif">
       {headline}
     </span>
   {/if}
@@ -37,7 +33,6 @@
 <script>
     import { article, type, jwt } from "../stores.js";
     import { createEventDispatcher } from 'svelte';
-    import { fly } from "svelte/transition";
     import { tick, beforeUpdate, getContext } from 'svelte';
 
     const { axios } = getContext("axios");
