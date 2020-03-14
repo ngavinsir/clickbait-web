@@ -33,7 +33,7 @@
             RESET
         </span>
         <Bt 
-            customClass="w-24 sm:w-32 text-base sm:mx-6" 
+            customClass="w-24 sm:w-32 text-base my-1 sm:mx-6" 
             on:click={submit}
             spinnerColor="#000"
             disabled={!selected.length || loading}
