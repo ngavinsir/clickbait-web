@@ -10,7 +10,6 @@
     {/if}
     {#each sentences as sentence, i ($article.id + i)}
         <div
-            on:introstart={intro(i)}
             in:fly={{duration:150, y:150, delay: 150}}
             out:fly={{duration:150, y:150}}
             class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 hover:bg-dark-8" : "sentence border-2 border-transparent"}
@@ -51,24 +50,22 @@
     import { tick } from 'svelte';
 
     let selected = [];
+    let sentences = [];
     let loading = false;
     let renderSentenceCount = true;
 
-    const intro = async (i) => {
-        if (i != 0) return;
+    $: updateContent($article);
+
+    async function updateContent(article) {
         renderSentenceCount = false;
+        selected = [];
         await tick();
+        sentences = article && article.content ? article.content.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|") : [];
         renderSentenceCount = true;
     }
 
-    $: sentences = $article && $article.content ? $article.content.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|") : [];
-
-    function isSelected(i) {
-        return selected.includes(i);
-    }
-
     function toggleSelect(i) {
-        if (isSelected(i)) selected = selected.filter(s => s != i);
+        if (selected.includes(i)) selected = selected.filter(s => s != i);
         else selected = [...selected, i];
     }
 
