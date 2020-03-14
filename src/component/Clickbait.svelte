@@ -1,13 +1,13 @@
 <div transition:fly={{duration:150, y:75}} class="footer">
     <Bt 
-        customClass="gray w-32 sm:w-40 m-2 sm:mx-6" 
+        customClass="gray w-32 sm:w-40 mx-2 sm:mx-6" 
         on:click={() => sendLabel("NotClickbait")}
         disabled={!article || loading}
         loading={loading === "NotClickbait"}
         value="Not Clickbait"
     />
     <Bt
-        customClass="white w-32 sm:w-40 m-2 sm:mx-6"
+        customClass="white w-32 sm:w-40 mx-2 sm:mx-6"
         on:click={() => sendLabel("Clickbait")}
         disabled={!article || loading}
         loading={loading === "Clickbait"}
