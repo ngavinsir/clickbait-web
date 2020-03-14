@@ -1,11 +1,7 @@
 <div class="flex flex-col pb-32">
     {#each sortedHistories as history,i (history.label.id)}
-        <div animate:flip={{duration:150}} transition:fade={{duration: 150}} class="mb-4 last:mb-0">
-            {#if $type == "clickbait"}
-                <ClickbaitLabel data={history} on:delete={e => deleteLabel(e.detail)}/>
-            {:else if $type == "summary"}
-                <SummaryLabel data={history} on:delete={e => deleteLabel(e.detail)}/>
-            {/if}
+        <div in:fly={{duration:150, y:50, delay: 150}} out:fly={{duration:150, y:50}} class="mb-4 last:mb-0">
+            <svelte:component this={labelComponent} data={history} on:delete={e => deleteLabel(e.detail)} />
         </div>
     {/each}
 </div>
@@ -18,14 +14,14 @@
     import ClickbaitLabel from "./label/Clickbait.svelte";
     import SummaryLabel from "./label/Summary.svelte";
     import { history, jwt, type } from "../stores.js";
-    import { fade } from 'svelte/transition';
-    import { flip } from 'svelte/animate';
+    import { fly } from 'svelte/transition';
     import config from "../config.js";
 
     $: getHistories($type);
     $: sortedHistories = _.sortBy($history, function(label) {
             return Date.parse(label.label.updated_at); 
         }).reverse();
+    $: labelComponent = $type == "clickbait" ? ClickbaitLabel : $type == "summary" ? SummaryLabel : null;
 
     async function getHistories(type) {
         if(!$jwt) return;
