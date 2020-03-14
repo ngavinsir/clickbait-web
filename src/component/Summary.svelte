@@ -32,17 +32,19 @@
         >
             RESET
         </span>
-        <button 
-            class="bt w-24 sm:w-32 text-base sm:mx-6 flex items-center justify-center" 
-            disabled={!selected.length || loading}
+        <Bt 
+            customClass="w-24 sm:w-32 text-base sm:mx-6" 
             on:click={submit}
-        >
-            Submit
-        </button>
+            spinnerColor="#000"
+            {loading}
+            disabled={!selected.length || loading}
+            value="Submit"
+        />
     </div>
 {/if}
 
 <script>
+    import Bt from "./Button.svelte";
     import { article, history } from "../stores.js";
     import { fly } from "svelte/transition";
     import { tick, getContext } from 'svelte';

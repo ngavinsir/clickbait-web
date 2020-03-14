@@ -1,23 +1,24 @@
 <div transition:fly={{duration:150, y:75}} class="footer">
-    <button 
-        class="bt gray hover:bg-dark-5 w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
-        on:click={() => sendLabel("NotClickbait")} 
+    <Bt 
+        customClass="gray hover:bg-dark-5 w-32 sm:w-40 m-2 sm:mx-6" 
+        on:click={() => sendLabel("NotClickbait")}
+        {loading}
         disabled={!article || loading}
-    >
-        Not Clickbait
-    </button>
-    <button 
-        class="bt white w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
-        on:click={() => sendLabel("Clickbait")} 
+        value="Not Clickbait"
+    />
+    <Bt
+        customClass="white w-32 sm:w-40 m-2 sm:mx-6"
+        on:click={() => sendLabel("Clickbait")}
+        {loading}
         disabled={!article || loading}
-    >
-        Clickbait
-    </button>
+        value="Clickbait"
+    />
 </div>
 
 <svelte:window on:keydown={handleKeydown}/>
 
 <script>
+    import Bt from "./Button.svelte";
     import { getContext } from "svelte";
     import { history, article } from "../stores.js";
     import { fly } from "svelte/transition";

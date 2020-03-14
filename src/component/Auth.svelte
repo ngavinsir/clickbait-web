@@ -25,7 +25,7 @@
         </div>
     </div>
 {:else if state}
-    <div class="fixed w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
+    <div class="fixed inset-0 w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
         <div class="flex flex-col items-center justify-center">
             {#if errorMessage}
                 <span class="mb-2 text-red-500 text-center max-w-xl">{errorMessage}</span>
@@ -45,9 +45,14 @@
                 spellcheck="false"
                 on:keydown={handleKeydown}
             />
-            <button class="bt w-64" on:click={isLogin ? login : register} disabled={loading}>
-                {state}
-            </button>
+            <Bt 
+                customClass="w-64" 
+                on:click={isLogin ? login : register}
+                spinnerColor="#000"
+                {loading}
+                disabled={loading}
+                value={state}
+            />
             <span class="text-center mt-4 text-white font-semibold text-lg" >
                 or 
                 <span 
@@ -64,6 +69,7 @@
 <script>
     import axios from "axios";
     import cookie from "js-cookie";
+    import Bt from "./Button.svelte";
     import { jwt, user, type } from "../stores.js";
     import config from "../config.js";
 
