@@ -73,7 +73,9 @@
 
     async function getArticle(jwt) {
       if(!$jwt) return;
-      loading = true;
+      const timeout = setTimeout(() => {
+        loading = true
+      }, 100);
       const url = `/article/random/${$type}`;
       try {
           const { data, data: { error } } = await axios.get(url);
@@ -82,6 +84,7 @@
           console.log(e);
           // handle get article error
       } finally {
+        clearTimeout(timeout);
         loading = false;
       }
     }
