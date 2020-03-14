@@ -23,12 +23,13 @@
     >
       {`${showContent ? "HIDE" : "SHOW"} CONTENT`}
     </span>
-    <span 
-      class="text-white ml-8 my-4 font-bold text-sm cursor-pointer"
-      on:click={getArticle} 
+    <button 
+      class="text-white ml-8 my-4 font-bold text-sm cursor-pointer disabled:opacity-50"
+      on:click={getArticle}
+      disabled={loading}
     >
       SKIP
-    </span>
+    </button>
   </div>
   {#if showContent}
     <div class="content-wrapper">
