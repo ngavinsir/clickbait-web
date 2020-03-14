@@ -1,5 +1,13 @@
 <div class="flex flex-col items-center">
-  <span class="w-full headline leading-tight font-serif">{$article && $article.headline ? $article.headline : "No headline"}</span>
+  {#if headline && renderHeadline}
+    <span 
+      out:fly={{duration: 150, x:50}} 
+      in:fly={{duration: 150, x:50}} 
+      class="w-full headline leading-tight font-serif"
+    >
+      {headline}
+    </span>
+  {/if}
   <div class="flex">
     <span 
       class="text-accent-3 my-4 font-bold text-sm cursor-pointer"
@@ -27,17 +35,28 @@
     import axios from "axios";
     import { article, jwt, type } from "../stores.js";
     import { createEventDispatcher } from 'svelte';
+    import { fly } from "svelte/transition";
+    import { tick, beforeUpdate } from 'svelte';
     import config from "../config.js";
 
     const dispatch = createEventDispatcher();
 
     let showContent = false;
+    let renderHeadline = true;
+    let headline;
 
     $: getArticle($jwt);
+    $: updateArticle($article);
+
+    async function updateArticle(article) {
+      renderHeadline = false;
+      await tick();
+      headline = article && article.headline ? article.headline : "No headline"
+      renderHeadline = true;
+    }
 
     async function handleKeydown(event) {
-      if(event.keyCode === 13) await dispatch("skip");
-      else return;
+      if(event.keyCode === 13) await getArticle($jwt);
     }
 
     async function getArticle(jwt) {
