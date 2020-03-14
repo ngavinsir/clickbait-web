@@ -1,4 +1,4 @@
-<div class="flex flex-col pb-32">
+<div class="flex flex-col">
     {#each sortedHistories as history,i (history.label.id)}
         <div 
             in:fly={{duration:150, y:50}}
