@@ -1,9 +1,18 @@
 <div class="flex flex-col items-center w-full max-w-screen-md">
-    {#if sentences.length}
-        <span class="text-white text-sm sm:text-base self-end mr-2 mb-2 mt-8">{sentences.length} sentences</span>
+    {#if sentences.length && renderSentenceCount}
+        <span
+            in:fly={{duration:150, y:150}}
+            out:fly={{duration:150, y:150}}
+            class="text-white text-sm sm:text-base self-end mr-2 mb-2 mt-8"
+        >
+            {sentences.length} sentences
+        </span>
     {/if}
-    {#each sentences as sentence, i (i)}
-        <div 
+    {#each sentences as sentence, i ($article.id + i)}
+        <div
+            on:introstart={intro(i)}
+            in:fly={{duration:150, y:150, delay: 150}}
+            out:fly={{duration:150, y:150}}
             class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 hover:bg-dark-8" : "sentence border-2 border-transparent"}
             on:click={() => toggleSelect(i)}
         >
@@ -39,9 +48,18 @@
     import { article, jwt, history } from "../stores.js";
     import config from "../config.js";
     import { fly } from "svelte/transition";
+    import { tick } from 'svelte';
 
     let selected = [];
     let loading = false;
+    let renderSentenceCount = true;
+
+    const intro = async (i) => {
+        if (i != 0) return;
+        renderSentenceCount = false;
+        await tick();
+        renderSentenceCount = true;
+    }
 
     $: sentences = $article && $article.content ? $article.content.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|") : [];
 
