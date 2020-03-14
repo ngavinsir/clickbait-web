@@ -1,9 +1,9 @@
 <div class="flex flex-col pb-32">
     {#each sortedHistories as history,i (history.label.id)}
         <div 
-            in:fly={{duration:80, y:50}}
-            out:fly={{duration:80, y:50}}
-            animate:flip={{duration:80}} class="mb-4 last:mb-0">
+            in:fly={{duration:150, y:50}}
+            out:fly={{duration:150, y:50}}
+            animate:flip={{duration:150}} class="mb-4 last:mb-0">
             <svelte:component this={labelComponent} data={history} on:delete={e => deleteLabel(e.detail)} />
         </div>
     {/each}
@@ -13,13 +13,14 @@
 
 <script>
     import _ from "lodash";
-    import axios from "axios";
     import ClickbaitLabel from "./label/Clickbait.svelte";
     import SummaryLabel from "./label/Summary.svelte";
-    import { history, jwt, type } from "../stores.js";
+    import { history, type } from "../stores.js";
     import { fly } from 'svelte/transition';
     import { flip } from "svelte/animate"
-    import config from "../config.js";
+    import { getContext } from "svelte";
+
+    const { axios } = getContext("axios");
 
     $: getHistories($type);
     $: sortedHistories = _.sortBy($history, function(label) {
@@ -28,28 +29,19 @@
     $: labelComponent = $type == "clickbait" ? ClickbaitLabel : $type == "summary" ? SummaryLabel : null;
 
     async function getHistories(type) {
-        if(!$jwt) return;
         $history = [];
-        const url = `${config.baseUrl}/label/${type}`;
-        const { data: histories, data: { error } } = await axios.get(url, {
-            headers: {
-                Authorization: `Bearer ${$jwt}`
-            }
-        });
+        const url = `/label/${type}`;
+        const { data: histories, data: { error } } = await axios.get(url);
         if(!error) $history = histories;
     }
 
     async function deleteLabel(labelID) {
-        const url = `${config.baseUrl}/label/${$type}/${labelID}`
-        const { data: { error }} = await axios.delete(url, {
-            headers: {
-                Authorization: `Bearer ${$jwt}`
-            }
-        });
+        const url = `/label/${$type}/${labelID}`
+        const { data: { error }} = await axios.delete(url);
         if(!error) await history.delete(labelID);
     }
 
     async function handleKeydown(event) {
-        if(event.keyCode === 8 && sortedHistories.length) await deleteLabel(sortedHistories[0].id)
+        if(event.keyCode === 8 && sortedHistories.length) await deleteLabel(sortedHistories[0].label.id)
     }
 </script>
