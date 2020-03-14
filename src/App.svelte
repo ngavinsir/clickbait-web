@@ -7,12 +7,12 @@
 	import Summary from "./component/Summary.svelte";
 	import Tailwindcss from './component/Tailwindcss.svelte';
 	import History from "./component/History.svelte";
-	import { jwt, type } from "./stores.js";
+	import { jwt, type, history } from "./stores.js";
 </script>
 
 <Modal>
 	<main>
-		<div class="min-w-screen min-h-screen flex flex-col items-center font-sans leading-normal">
+		<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal">
 			<Auth />
 			{#if $jwt}
 				<Axios>
@@ -24,9 +24,11 @@
 							<Summary />
 						{/if}
 					</div>
-					<div class="mt-8 w-11/12 max-w-screen-md">
-						<History />
-					</div>
+					{#if $history.length}
+						<div class="mt-8 w-11/12 max-w-screen-md">
+							<History />
+						</div>
+					{/if}
 				</Axios>
 			{/if}
 		</div>
