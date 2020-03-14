@@ -27,6 +27,6 @@
 
 <style type="text/postcss">
 svg {
-    max-width: 24px;
+    width: 20px;
 }
 </style>
