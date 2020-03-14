@@ -1,6 +1,9 @@
 <div class="flex flex-col pb-32">
     {#each sortedHistories as history,i (history.label.id)}
-        <div in:fly={{duration:150, y:50, delay: 150}} out:fly={{duration:150, y:50}} class="mb-4 last:mb-0">
+        <div 
+            in:fly={{duration:80, y:50}}
+            out:fly={{duration:80, y:50}}
+            animate:flip={{duration:80}} class="mb-4 last:mb-0">
             <svelte:component this={labelComponent} data={history} on:delete={e => deleteLabel(e.detail)} />
         </div>
     {/each}
@@ -15,6 +18,7 @@
     import SummaryLabel from "./label/Summary.svelte";
     import { history, jwt, type } from "../stores.js";
     import { fly } from 'svelte/transition';
+    import { flip } from "svelte/animate"
     import config from "../config.js";
 
     $: getHistories($type);
