@@ -24,11 +24,9 @@
 							<Summary />
 						{/if}
 					</div>
-					{#if $history.length}
-						<div class="mt-8 w-11/12 max-w-screen-md">
-							<History />
-						</div>
-					{/if}
+					<div class="mt-8 w-11/12 max-w-screen-md">
+						<History />
+					</div>
 				</Axios>
 			{/if}
 		</div>
