@@ -12,11 +12,11 @@
 
 <Modal>
 	<main>
-		<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal">
+		<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal py-20">
 			<Auth />
 			{#if $jwt}
 				<Axios>
-					<div class="flex flex-col items-center mt-20 w-11/12 max-w-4xl">
+					<div class="flex flex-col items-center w-11/12 max-w-4xl">
 						<Article />
 						{#if $type == "clickbait"}
 							<Clickbait />
