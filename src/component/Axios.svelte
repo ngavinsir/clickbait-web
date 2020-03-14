@@ -4,10 +4,7 @@
     import axios from "axios";
     import config from "../config.js";
 
-    $: {
-        console.log($jwt);
-        instance.defaults.headers.common['Authorization'] = `Bearer ${$jwt}`;
-    }
+    $: instance.defaults.headers.common['Authorization'] = `Bearer ${$jwt}`;
 
     const instance = axios.create({
             baseURL: config.baseUrl,

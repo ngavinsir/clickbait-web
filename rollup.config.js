@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -27,7 +28,7 @@ export default {
 			preprocess: sveltePreprocess({ postcss: true })
 		}),
 		replace({
-			BASE_URL: process.env.BASE_URL || "http://localhost:4040/"
+			BASE_URL: process.env.BASE_URL || "http://localhost:4040"
 		}),
 
 		// If you have external dependencies installed from

@@ -62,11 +62,10 @@
 {/if}
 
 <script>
-    import { getContext } from "svelte";
+    import axios from "axios";
     import cookie from "js-cookie";
     import { jwt, user, type } from "../stores.js";
-
-    const { axios } = getContext("axios");
+    import config from "../config.js";
 
     let state = "Login";
     let showDropdown = false;
@@ -80,7 +79,7 @@
 
     async function login() {
         loading = true;
-        const url = `/login`;
+        const url = `${config.baseUrl}/login`;
         const data = { username, password };
         try {
             const { data: token, data: { error } } = await axios.post(url, data)
@@ -100,7 +99,7 @@
 
     async function register() {
         loading = true;
-        const url = `/register`;
+        const url = `${config.baseUrl}/register`;
         const data = { username, password };
         try {
             const { data: token, data: { error } } = await axios.post(url, data)
