@@ -5,7 +5,12 @@
                 in:fly={{duration:150, y:50}}
                 out:fly={{duration:150, y:50}}
                 animate:flip={{duration:150}} class="mb-4 last:mb-0">
-                <svelte:component this={labelComponent} data={history} on:delete={e => deleteLabel(e.detail)} />
+                <svelte:component 
+                    this={labelComponent} 
+                    data={history} 
+                    on:delete={e => deleteLabel(e.detail)}
+                    deleting={deleting.includes(history.label.id)}
+                />
             </div>
         {/each}
     </div>
@@ -23,6 +28,7 @@
     import { getContext } from "svelte";
 
     const { axios } = getContext("axios");
+    let deleting = [];
 
     $: getHistories($type);
     $: sortedHistories = _.sortBy($history, function(label) {
@@ -38,9 +44,17 @@
     }
 
     async function deleteLabel(labelID) {
+        deleting = [...deleting, labelID]
         const url = `/label/${$type}/${labelID}`
-        const { data: { error }} = await axios.delete(url);
-        if(!error) await history.delete(labelID);
+        try {
+            const { data: { error }} = await axios.delete(url);
+            if(!error) await history.delete(labelID);
+        } catch (e) {
+            console.log(e);
+            // handle delete label error
+        } finally {
+            deleting = deleting.filter(d => d !== labelID);
+        }
     }
 
     async function handleKeydown(event) {
