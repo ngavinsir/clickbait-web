@@ -1,4 +1,4 @@
-<div class="footer">
+<div transition:fly={{duration:150, y:75}} class="footer">
     <button 
         class="bt gray hover:bg-dark-5 w-32 sm:w-40 m-2 sm:mx-6 flex items-center justify-center" 
         on:click={() => sendLabel("NotClickbait")} 
@@ -21,6 +21,7 @@
     import axios from "axios";
     import { jwt, history, article } from "../stores.js";
     import config from "../config.js";
+    import { fly } from "svelte/transition";
 
     let loading = false;
 

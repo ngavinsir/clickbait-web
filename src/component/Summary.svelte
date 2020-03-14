@@ -16,7 +16,7 @@
 </div>
 
 {#if selected.length}
-    <div class="footer">
+    <div transition:fly={{duration:150, y:75}} class="footer">
         <span class="text-white sm:ml-4 mr-auto text-sm sm:text-base">{selected.length} selected</span>
         <span 
             class="text-white mr-4 font-bold text-sm cursor-pointer"
@@ -38,6 +38,7 @@
     import axios from "axios";
     import { article, jwt, history } from "../stores.js";
     import config from "../config.js";
+    import { fly } from "svelte/transition";
 
     let selected = [];
     let loading = false;
