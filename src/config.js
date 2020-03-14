@@ -1,5 +1,5 @@
 const config = {
-    baseUrl: "https://clickbait-labeling.herokuapp.com/"
+    baseUrl: "BASE_URL"
 }
 
 export default config;

@@ -26,6 +26,9 @@ export default {
 			},
 			preprocess: sveltePreprocess({ postcss: true })
 		}),
+		replace({
+			BASE_URL: process.env.BASE_URL || "http://localhost:4040/"
+		}),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
