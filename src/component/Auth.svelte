@@ -16,7 +16,7 @@
             <span class="text-gray-100 cursor-pointer">{$user.username}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>
                 <button 
-                    class="w-full text-left px-4 py-2 text-dark-9 hover:text-accent-5 flex items-center" 
+                    class="w-full text-left px-4 py-2 text-dark-9 hover:underline flex items-center" 
                     on:click={signout}
                 >
                     Sign out
@@ -45,11 +45,12 @@
                 spellcheck="false"
                 on:keydown={handleKeydown}
             />
-            <Bt 
+            <Bt
+                bind:this={bt}
                 customClass="w-64" 
-                on:click={isLogin ? login : register}
-                spinnerColor="#000"
+                onClick={isLogin ? login : register}
                 {loading}
+                spinnerColor="#000"
                 disabled={loading}
                 value={state}
             />
@@ -80,6 +81,7 @@
     let loading = false;
     let username = "";
     let password = "";
+    let bt;
 
     $: isLogin = state === "Login"
 

@@ -1,16 +1,16 @@
 <div transition:fly={{duration:150, y:75}} class="footer">
     <Bt 
-        customClass="gray hover:bg-dark-5 w-32 sm:w-40 m-2 sm:mx-6" 
+        customClass="gray w-32 sm:w-40 m-2 sm:mx-6" 
         on:click={() => sendLabel("NotClickbait")}
-        {loading}
         disabled={!article || loading}
+        loading={loading === "NotClickbait"}
         value="Not Clickbait"
     />
     <Bt
         customClass="white w-32 sm:w-40 m-2 sm:mx-6"
         on:click={() => sendLabel("Clickbait")}
-        {loading}
         disabled={!article || loading}
+        loading={loading === "Clickbait"}
         value="Clickbait"
     />
 </div>
@@ -24,10 +24,10 @@
     import { fly } from "svelte/transition";
 
     const { axios } = getContext("axios");
-    let loading = false;
+    let loading = null;
 
     async function sendLabel(label) {
-        loading = true;
+        loading = label;
         const url = `/labeling/clickbait`;
         const data = {
             value: label,
@@ -50,7 +50,7 @@
             console.log(e);
             // handle send label error
         } finally {
-            loading = false;
+            loading = null;
         }
     }
 

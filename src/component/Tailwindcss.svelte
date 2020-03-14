@@ -44,11 +44,11 @@
   }
 
   .gray {
-    @apply bg-dark-7 text-gray-100;
+    @apply bg-dark-6 text-gray-100;
   }
 
   .gray:hover:enabled {
-    @apply bg-dark-6;
+    @apply bg-dark-7;
   }
 
   .menu {

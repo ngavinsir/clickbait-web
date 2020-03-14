@@ -1,5 +1,5 @@
 <button 
-    class={`bt flex items-center justify-center ${customClass}`}
+    class={`bt flex items-center justify-center ${customClass} ${loading ? "disabled:opacity-100" : ""}`}
     on:click
     {disabled}
 >
@@ -7,7 +7,7 @@
         <Spinner
           size="20"
           speed="750"
-          color={spinnerColor || "#41da8f"}
+          color={spinnerColor}
           thickness="5"
           gap="40"
         />
@@ -21,7 +21,7 @@
 
     export let disabled;
     export let value;
-    export let loading;
     export let customClass;
-    export let spinnerColor;
+    export let spinnerColor = "#41da8f";
+    export let loading;
 </script>
