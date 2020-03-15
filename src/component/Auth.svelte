@@ -41,7 +41,7 @@
                 <input 
                     class="mb-4 w-64 shadow-md" 
                     bind:value={username} type="text" 
-                    placeholder="your username..." 
+                    placeholder="username..." 
                     spellcheck="false"
                     on:keydown={handleKeydown}
                 />
@@ -52,7 +52,7 @@
                     class="mb-6 w-64 shadow-md" 
                     bind:value={password} 
                     type="password" 
-                    placeholder="your password..."
+                    placeholder="password..."
                     spellcheck="false"
                     on:keydown={handleKeydown}
                 />

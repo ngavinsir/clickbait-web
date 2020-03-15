@@ -28,9 +28,9 @@
             <span
                 in:fly={{duration:150, y:50}}
                 out:fly={{duration:150, y:50}}
-                class="self-center py-4 text-white font-bold opacity-50 text-lg"
+                class="self-center py-5 text-white font-bold opacity-50 sm:text-lg"
             >
-                NO HISTORY
+                There is no history...
             </span>
         {/if}
     </div>
