@@ -85,6 +85,7 @@
 	    damping: 0.5
     });
 
+    $: if(!selected.length) footerHeight = 0;
     $: updateContent($article);
     $: fibSpring.set(footerHeight ? -footerHeight : 0);
 
