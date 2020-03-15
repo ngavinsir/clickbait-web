@@ -24,7 +24,7 @@
                     gap="40"
                 />
             </div>
-        {:else}
+        {:else if !cancelSource}
             <span
                 in:fly={{duration:150, y:50}}
                 out:fly={{duration:150, y:50}}
