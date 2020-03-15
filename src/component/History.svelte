@@ -28,7 +28,7 @@
             <span
                 in:fly={{duration:150, y:50}}
                 out:fly={{duration:150, y:50}}
-                class="self-center py-5 text-white font-bold opacity-50 sm:text-lg"
+                class="self-center pt-5 text-white font-bold opacity-50 sm:text-lg"
             >
                 There is no history...
             </span>
