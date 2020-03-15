@@ -1,4 +1,4 @@
-{#if $type === "summary" && !$showHistory}
+{#if !$showHistory}
     <div class="flex flex-col items-center w-full max-w-screen-md">
         {#if sentences.length && renderSentenceCount}
             <span
@@ -8,19 +8,21 @@
                 {sentences.length} sentences
             </span>
         {/if}
-        {#each sentences as sentence, i ($article.id + i)}
-            <div
-                in:fly={{duration:200, y:150, delay: 200}}
-                out:fly={{duration:200, y:150}}
-                class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 sm:hover:bg-dark-8" : "sentence border-2 border-transparent"}
-                on:click={() => toggleSelect(i)}
-            >
-                <span class={selected.includes(i) ? "numbering bg-blue-500" : "numbering"}>
-                    {selected.includes(i) ? selected.indexOf(i)+1 : i+1}
-                </span>
-                <span class="ml-4 text-gray-100 sm:text-lg">{sentence}</span>
-            </div>
-        {/each}
+        {#if $type === "summary" && sentences.length}
+            {#each sentences as sentence, i (`${$article.id}-${i}`)}
+                <div
+                    in:fly={{duration:200, y:150, delay: 200}}
+                    out:fly={{duration:200, y:150}}
+                    class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 sm:hover:bg-dark-8" : "sentence border-2 border-transparent"}
+                    on:click={() => toggleSelect(i)}
+                >
+                    <span class={selected.includes(i) ? "numbering bg-blue-500" : "numbering"}>
+                        {selected.includes(i) ? selected.indexOf(i)+1 : i+1}
+                    </span>
+                    <span class="ml-4 text-gray-100 sm:text-lg">{sentence}</span>
+                </div>
+            {/each}
+        {/if}
     </div>
 {/if}
 
