@@ -69,7 +69,7 @@
             <span class="text-center mt-4 text-white font-base text-lg" >
                 or 
                 <span 
-                    class="text-accent-5 cursor-pointer hover:underline" 
+                    class="text-accent-3 cursor-pointer hover:underline" 
                     on:click={() => state = isLogin ? "Register" : "Login"}
                 >
                     {isLogin ? "Register" : "Login"}
