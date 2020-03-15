@@ -36,27 +36,31 @@
             {#if errorMessage}
                 <span class="mb-2 text-red-500 text-center max-w-xl">{errorMessage}</span>
             {/if}
-            <label class="flex flex-col text-white">
-                Username
-                <input 
-                    class="mb-4 w-64 shadow-md" 
-                    bind:value={username} type="text" 
-                    placeholder="username..." 
-                    spellcheck="false"
-                    on:keydown={handleKeydown}
-                />
-            </label>
-            <label class="flex flex-col text-white">
-                Password
-                <input 
-                    class="mb-6 w-64 shadow-md" 
-                    bind:value={password} 
-                    type="password" 
-                    placeholder="password..."
-                    spellcheck="false"
-                    on:keydown={handleKeydown}
-                />
-            </label>
+            <form>
+                <label class="flex flex-col text-white">
+                    Username
+                    <input
+                        id="username"
+                        class="mb-4 w-64 shadow-md" 
+                        bind:value={username} type="text" 
+                        placeholder="username..." 
+                        spellcheck="false"
+                        on:keydown={handleKeydown}
+                    />
+                </label>
+                <label class="flex flex-col text-white">
+                    Password
+                    <input 
+                        data-dependency="username"
+                        class="mb-6 w-64 shadow-md" 
+                        bind:value={password} 
+                        type="password" 
+                        placeholder="password..."
+                        spellcheck="false"
+                        on:keydown={handleKeydown}
+                    />
+                </label>
+            </form>
             <Bt
                 bind:this={bt}
                 customClass="w-64 font-base" 
