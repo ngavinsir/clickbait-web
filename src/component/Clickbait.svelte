@@ -28,7 +28,7 @@
 
     async function sendLabel(label) {
         loading = label;
-        const url = `/labeling/clickbait`;
+        const url = `/clickbait/labeling`;
         const data = {
             value: label,
             article_id: $article.id

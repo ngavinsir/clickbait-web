@@ -75,7 +75,7 @@
     async function submit() {
         loading = true;
         const summary = selected.map(i => sentences[i]).join(" ");
-        const url = `/labeling/summary`;
+        const url = `/summary/labeling`;
         const data = {
             value: summary,
             article_id: $article.id

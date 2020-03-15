@@ -76,7 +76,7 @@
       const timeout = setTimeout(() => {
         loading = true
       }, 100);
-      const url = `/article/random/${$type}`;
+      const url = `/${$type}/article/random`;
       try {
           const { data, data: { error } } = await axios.get(url);
           $article = !error ? data : null;

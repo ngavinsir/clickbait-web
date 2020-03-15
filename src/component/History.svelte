@@ -36,14 +36,14 @@
 
     async function getHistories(type) {
         $history = [];
-        const url = `/label/${type}`;
+        const url = `/${type}/label`;
         const { data: histories, data: { error } } = await axios.get(url);
         if(!error) $history = histories;
     }
 
     async function deleteLabel(labelID) {
         deleting = [...deleting, labelID]
-        const url = `/label/${$type}/${labelID}`
+        const url = `/${$type}/label/${labelID}`
         try {
             const { data: { error }} = await axios.delete(url);
             if(!error) await history.delete(labelID);
