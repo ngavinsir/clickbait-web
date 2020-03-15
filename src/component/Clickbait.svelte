@@ -27,6 +27,7 @@
     let loading = null;
 
     async function sendLabel(label) {
+        if(loading) return;
         loading = label;
         const url = `/clickbait/labeling`;
         const data = {

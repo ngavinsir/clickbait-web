@@ -73,6 +73,7 @@
     }
 
     async function submit() {
+        if(loading) return;
         loading = true;
         const summary = selected.map(i => sentences[i]).join(" ");
         const url = `/summary/labeling`;

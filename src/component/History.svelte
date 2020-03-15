@@ -42,6 +42,7 @@
     }
 
     async function deleteLabel(labelID) {
+        if(deleting.includes(labelID)) return;
         deleting = [...deleting, labelID]
         const url = `/${$type}/label/${labelID}`
         try {

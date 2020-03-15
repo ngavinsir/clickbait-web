@@ -72,7 +72,7 @@
     }
 
     async function getArticle(jwt) {
-      if(!$jwt) return;
+      if(!$jwt || loading) return;
       const timeout = setTimeout(() => {
         loading = true
       }, 100);
