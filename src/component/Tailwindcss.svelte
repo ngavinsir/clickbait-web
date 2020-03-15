@@ -62,9 +62,7 @@
   .sentence {
     @apply flex mb-4 rounded-lg bg-dark-7 p-2 w-full cursor-pointer shadow-2xl;
   }
-  .sentence:hover {
-      @apply bg-dark-8;
-  }
+
   .sentence:last-child {
       @apply mb-0;
   }
@@ -79,6 +77,9 @@
     }
     .sentence {
       @apply p-4;
+    }
+    .sentence:hover {
+      @apply bg-dark-8;
     }
     .footer {
       @apply py-4 px-6;

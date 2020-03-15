@@ -12,7 +12,7 @@
         <div
             in:fly={{duration:150, y:150, delay: 150}}
             out:fly={{duration:150, y:150}}
-            class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 hover:bg-dark-8" : "sentence border-2 border-transparent"}
+            class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 sm:hover:bg-dark-8" : "sentence border-2 border-transparent"}
             on:click={() => toggleSelect(i)}
         >
             <span class={selected.includes(i) ? "numbering bg-blue-500" : "numbering"}>
