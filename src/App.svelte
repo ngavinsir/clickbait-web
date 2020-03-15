@@ -8,6 +8,8 @@
 	import Tailwindcss from './component/Tailwindcss.svelte';
 	import History from "./component/History.svelte";
 	import { jwt, type, history } from "./stores.js";
+
+	$: component = $type === "clickbait" ? Clickbait : $type === "summary" ? Summary : null;
 </script>
 
 <main>
@@ -17,11 +19,7 @@
 			<Axios><Modal>
 				<div class="flex flex-col items-center w-11/12 max-w-4xl">
 					<Article />
-					{#if $type === "clickbait"}
-						<Clickbait />
-					{:else if $type === "summary"}
-						<Summary />
-					{/if}
+					<svelte:component this={component} />
 				</div>
 				<div class="mt-8 w-11/12 max-w-screen-md">
 					<History />
