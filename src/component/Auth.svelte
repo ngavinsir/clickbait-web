@@ -22,7 +22,7 @@
             <span class="text-gray-100 cursor-pointer">{$user.username}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>
                 <button 
-                    class="w-full text-left px-4 py-2 text-dark-9 hover:underline flex items-center" 
+                    class="w-full text-left px-4 py-2 text-white hover:underline flex items-center" 
                     on:click={signout}
                 >
                     Sign out
@@ -154,6 +154,6 @@
 
 <style type="text/postcss">
 .dropdown-wrapper {
-    @apply w-32 pt-2 bg-dark-5 absolute right-0 rounded-lg shadow-xl py-2;
+    @apply w-32 pt-2 bg-dark-7 absolute right-0 rounded-lg shadow-xl py-2;
 }
 </style>
