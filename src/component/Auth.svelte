@@ -2,13 +2,19 @@
     <div class="fixed top-0 bg-dark-8 border-b-2 border-dark-7 w-screen p-4 px-6 flex items-center z-20 shadow-2xl">
         <span 
             class={$type == "clickbait" ? "menu bg-accent-3 text-dark-9" : "menu"}
-            on:click={() => $type = "clickbait"}
+            on:click={() => {
+                scrollY = 0;
+                $type = "clickbait";
+            }}
         >
             Clickbait
         </span>
         <span 
             class={$type == "summary" ? "menu bg-accent-3 text-dark-9 ml-4" : "menu ml-4"}
-            on:click={() => $type = "summary"}
+            on:click={() => {
+                scrollY = 0;
+                $type = "summary"
+            }}
         >
             Summary
         </span>
@@ -67,6 +73,8 @@
     </div>
 {/if}
 
+<svelte:window bind:scrollY={scrollY}/>
+
 <script>
     import axios from "axios";
     import cookie from "js-cookie";
@@ -82,6 +90,7 @@
     let username = "";
     let password = "";
     let bt;
+    let scrollY;
 
     $: isLogin = state === "Login"
 

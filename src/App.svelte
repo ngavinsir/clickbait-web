@@ -11,15 +11,15 @@
 </script>
 
 <main>
-	<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal py-20">
+	<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal pt-20 pb-32">
 		<Auth />
 		{#if $jwt}
 			<Axios><Modal>
 				<div class="flex flex-col items-center w-11/12 max-w-4xl">
 					<Article />
-					{#if $type == "clickbait"}
+					{#if $type === "clickbait"}
 						<Clickbait />
-					{:else if $type == "summary"}
+					{:else if $type === "summary"}
 						<Summary />
 					{/if}
 				</div>

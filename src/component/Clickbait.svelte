@@ -1,4 +1,4 @@
-<div transition:fly={{duration:150, y:75}} class="footer">
+<div transition:slide={{duration:150}} class="footer">
     <Bt 
         customClass="gray w-32 sm:w-40 mx-2 my-1 sm:mx-6" 
         on:click={() => sendLabel("NotClickbait")}
@@ -21,7 +21,7 @@
     import Bt from "./Button.svelte";
     import { getContext } from "svelte";
     import { history, article } from "../stores.js";
-    import { fly } from "svelte/transition";
+    import { slide } from "svelte/transition";
 
     const { axios } = getContext("axios");
     let loading = null;

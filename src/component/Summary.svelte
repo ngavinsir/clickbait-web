@@ -1,8 +1,7 @@
 <div class="flex flex-col items-center w-full max-w-screen-md">
     {#if sentences.length && renderSentenceCount}
         <span
-            in:fly={{duration:150, y:150}}
-            out:fly={{duration:150, y:150}}
+            in:fly={{duration:200, y:150}}
             class="text-white text-sm sm:text-base self-end mr-2 mb-2 mt-8"
         >
             {sentences.length} sentences
@@ -10,8 +9,7 @@
     {/if}
     {#each sentences as sentence, i ($article.id + i)}
         <div
-            in:fly={{duration:150, y:150, delay: 150}}
-            out:fly={{duration:150, y:150}}
+            transition:fly={{duration:200, y:150}}
             class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 sm:hover:bg-dark-8" : "sentence border-2 border-transparent"}
             on:click={() => toggleSelect(i)}
         >
@@ -24,7 +22,7 @@
 </div>
 
 {#if selected.length}
-    <div transition:fly={{duration:150, y:75}} class="footer">
+    <div transition:slide={{duration:150}} class="footer">
         <span class="text-white sm:ml-4 mr-auto text-sm sm:text-base">{selected.length} selected</span>
         <span 
             class="text-white mr-4 font-bold text-sm cursor-pointer"
@@ -48,7 +46,7 @@
 <script>
     import Bt from "./Button.svelte";
     import { article, history } from "../stores.js";
-    import { fly } from "svelte/transition";
+    import { fly, slide } from "svelte/transition";
     import { tick, getContext } from 'svelte';
 
     const { axios } = getContext("axios");
