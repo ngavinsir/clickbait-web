@@ -68,7 +68,7 @@
   }
 
   .footer {
-    @apply fixed bottom-0 border-t-2 border-dark-7 bg-dark-8 w-screen py-2 px-4 flex items-center justify-end z-20;
+    @apply fixed bottom-0 left-0 border-t-2 border-dark-7 bg-dark-8 w-screen py-2 px-4 flex items-center justify-end z-20;
   }
 
   @screen sm {

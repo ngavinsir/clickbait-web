@@ -1,18 +1,20 @@
-<div class="flex flex-col">
-    {#each sortedHistories as history,i (history.label.id)}
-        <div 
-            in:fly={{duration:150, y:50}}
-            out:fly={{duration:150, y:50}}
-            animate:flip={{duration:150}} class="mb-4 last:mb-0">
-            <svelte:component 
-                this={labelComponent} 
-                data={history} 
-                on:delete={e => deleteLabel(e.detail)}
-                deleting={deleting.includes(history.label.id)}
-            />
-        </div>
-    {/each}
-</div>
+{#if $type === "clickbait" || $showHistory}
+    <div class="flex flex-col">
+        {#each sortedHistories as history,i (history.label.id)}
+            <div 
+                in:fly={{duration:150, y:50}}
+                out:fly={{duration:150, y:50}}
+                animate:flip={{duration:150}} class="mb-4 last:mb-0">
+                <svelte:component 
+                    this={labelComponent} 
+                    data={history} 
+                    on:delete={e => deleteLabel(e.detail)}
+                    deleting={deleting.includes(history.label.id)}
+                />
+            </div>
+        {/each}
+    </div>
+{/if}
 
 <svelte:window on:keydown={handleKeydown}/>
 
@@ -20,7 +22,7 @@
     import _ from "lodash";
     import ClickbaitLabel from "./label/Clickbait.svelte";
     import SummaryLabel from "./label/Summary.svelte";
-    import { history, type } from "../stores.js";
+    import { history, type, showHistory } from "../stores.js";
     import { fly } from 'svelte/transition';
     import { flip } from "svelte/animate"
     import { getContext } from "svelte";

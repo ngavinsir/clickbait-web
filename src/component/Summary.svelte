@@ -1,28 +1,48 @@
-<div class="flex flex-col items-center w-full max-w-screen-md">
-    {#if sentences.length && renderSentenceCount}
-        <span
-            in:fly={{duration:200, y:150}}
-            class="text-white text-sm sm:text-base self-end mr-2 mb-2 mt-8"
-        >
-            {sentences.length} sentences
-        </span>
-    {/if}
-    {#each sentences as sentence, i ($article.id + i)}
-        <div
-            transition:fly={{duration:200, y:150}}
-            class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 sm:hover:bg-dark-8" : "sentence border-2 border-transparent"}
-            on:click={() => toggleSelect(i)}
-        >
-            <span class={selected.includes(i) ? "numbering bg-blue-500" : "numbering"}>
-                {selected.includes(i) ? selected.indexOf(i)+1 : i+1}
+{#if $type === "summary" && !$showHistory}
+    <div class="flex flex-col items-center w-full max-w-screen-md">
+        {#if sentences.length && renderSentenceCount}
+            <span
+                in:fly={{duration:200, y:150}}
+                class="text-white text-sm sm:text-base self-end mr-2 mb-2 mt-8"
+            >
+                {sentences.length} sentences
             </span>
-            <span class="ml-4 text-gray-100 sm:text-lg">{sentence}</span>
-        </div>
-    {/each}
-</div>
+        {/if}
+        {#each sentences as sentence, i ($article.id + i)}
+            <div
+                in:fly={{duration:200, y:150, delay: 200}}
+                out:fly={{duration:200, y:150}}
+                class={selected.includes(i) ? "sentence border-white border-2 bg-dark-8 sm:hover:bg-dark-8" : "sentence border-2 border-transparent"}
+                on:click={() => toggleSelect(i)}
+            >
+                <span class={selected.includes(i) ? "numbering bg-blue-500" : "numbering"}>
+                    {selected.includes(i) ? selected.indexOf(i)+1 : i+1}
+                </span>
+                <span class="ml-4 text-gray-100 sm:text-lg">{sentence}</span>
+            </div>
+        {/each}
+    </div>
+{/if}
 
-{#if selected.length}
-    <div transition:slide={{duration:150}} class="footer">
+<button
+    transition:slide={{duration:150}}
+    on:click={() => $showHistory = !$showHistory}
+    class="fixed border-2 border-dark-7 bottom-0 right-0 mr-5 mb-5 sm:mr-8 sm:mb-8 p-4 w-16 h-16 focus:outline-none rounded-full bg-dark-8 sm:hover:bg-dark-7 shadow-2xl flex items-center justify-center"
+    style={`transform: translateY(${$fibSpring}px);`}
+>
+    {#if $showHistory}
+        <svg class="w-full h-full" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path style={"max-width: 18px"} d="M7 8H17M7 12H11M12 20L8 16H5C3.89543 16 3 15.1046 3 14V6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V14C21 15.1046 20.1046 16 19 16H16L12 20Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    {:else}
+        <svg class="w-full h-full" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path style={"max-width: 18px"} d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15M9 5C9 6.10457 9.89543 7 11 7H13C14.1046 7 15 6.10457 15 5M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5M12 12H15M12 16H15M9 12H9.01M9 16H9.01" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    {/if}
+</button>
+
+{#if $type === "summary" && selected.length && !$showHistory}
+    <div bind:clientHeight={footerHeight} transition:slide={{duration:150}} class="footer">
         <span class="text-white sm:ml-4 mr-auto text-sm sm:text-base">{selected.length} selected</span>
         <span 
             class="text-white mr-4 font-bold text-sm cursor-pointer"
@@ -45,9 +65,10 @@
 
 <script>
     import Bt from "./Button.svelte";
-    import { article, history } from "../stores.js";
+    import { article, history, showHistory, type } from "../stores.js";
     import { fly, slide } from "svelte/transition";
     import { tick, getContext } from 'svelte';
+    import { spring } from 'svelte/motion';
 
     const { axios } = getContext("axios");
 
@@ -56,8 +77,14 @@
     let loading = false;
     let renderSentenceCount = true;
     let scrollY;
+    let footerHeight = 0;
+    let fibSpring = spring(0, {
+        stiffness: 0.12,
+	    damping: 0.5
+    });
 
     $: updateContent($article);
+    $: if(footerHeight) fibSpring.set(-footerHeight);
 
     async function updateContent(article) {
         renderSentenceCount = false;
