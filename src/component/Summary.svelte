@@ -43,6 +43,8 @@
     </div>
 {/if}
 
+<svelte:window bind:scrollY={scrollY}/>
+
 <script>
     import Bt from "./Button.svelte";
     import { article, history } from "../stores.js";
@@ -55,6 +57,7 @@
     let sentences = [];
     let loading = false;
     let renderSentenceCount = true;
+    let scrollY;
 
     $: updateContent($article);
 
@@ -92,6 +95,7 @@
                     article: $article,
                 })
                 $article = new_article;
+                scrollY = 0;
             }
         } catch (e) {
             console.log(e);
