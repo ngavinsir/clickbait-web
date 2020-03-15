@@ -86,7 +86,7 @@
     });
 
     $: updateContent($article);
-    $: if(footerHeight) fibSpring.set(-footerHeight);
+    $: fibSpring.set(footerHeight ? -footerHeight : 0);
 
     async function updateContent(article) {
         renderSentenceCount = false;

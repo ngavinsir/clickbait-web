@@ -13,7 +13,7 @@
 </script>
 
 <main>
-	<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal pt-20 pb-32">
+	<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal pt-20 pb-48">
 		<Auth />
 		{#if $jwt}
 			<Axios><Modal>
