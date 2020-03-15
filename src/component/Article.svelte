@@ -24,7 +24,7 @@
       {`${showContent ? "HIDE" : "SHOW"} CONTENT`}
     </span>
     <button 
-      class="text-white ml-8 my-4 font-bold text-sm cursor-pointer disabled:opacity-50 disabled:cursor-default"
+      class="text-white ml-8 my-4 font-bold focus:outline-none text-sm cursor-pointer disabled:opacity-50 disabled:cursor-default"
       on:click={getArticle}
       disabled={loading}
     >
