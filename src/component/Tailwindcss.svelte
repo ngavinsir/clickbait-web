@@ -2,11 +2,11 @@
   @tailwind base;
 
   input {
-    @apply p-2 bg-dark-1 rounded-md text-dark-9 outline-none;
+    @apply p-2 bg-dark-7 rounded-md text-white outline-none shadow-lg;
   }
 
   input::placeholder {
-    @apply text-dark-5;
+    @apply text-dark-3;
   }
 
   .bt {

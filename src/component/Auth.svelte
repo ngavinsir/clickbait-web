@@ -36,31 +36,37 @@
             {#if errorMessage}
                 <span class="mb-2 text-red-500 text-center max-w-xl">{errorMessage}</span>
             {/if}
-            <input 
-                class="mb-4 w-64 shadow-md" 
-                bind:value={username} type="text" 
-                placeholder="username" 
-                spellcheck="false"
-                on:keydown={handleKeydown}
-            />
-            <input 
-                class="mb-6 w-64 shadow-md" 
-                bind:value={password} 
-                type="password" 
-                placeholder="password"
-                spellcheck="false"
-                on:keydown={handleKeydown}
-            />
+            <label class="flex flex-col text-white">
+                Username
+                <input 
+                    class="mb-4 w-64 shadow-md" 
+                    bind:value={username} type="text" 
+                    placeholder="your username..." 
+                    spellcheck="false"
+                    on:keydown={handleKeydown}
+                />
+            </label>
+            <label class="flex flex-col text-white">
+                Password
+                <input 
+                    class="mb-6 w-64 shadow-md" 
+                    bind:value={password} 
+                    type="password" 
+                    placeholder="your password..."
+                    spellcheck="false"
+                    on:keydown={handleKeydown}
+                />
+            </label>
             <Bt
                 bind:this={bt}
-                customClass="w-64" 
+                customClass="w-64 font-base" 
                 on:click={isLogin ? login : register}
                 {loading}
                 spinnerColor="#000"
                 disabled={loading}
                 value={state}
             />
-            <span class="text-center mt-4 text-white font-semibold text-lg" >
+            <span class="text-center mt-4 text-white font-base text-lg" >
                 or 
                 <span 
                     class="text-accent-5 cursor-pointer hover:underline" 
