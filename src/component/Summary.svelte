@@ -8,7 +8,7 @@
                 {sentences.length} sentences
             </span>
         {/if}
-        {#if $type === "summary" && sentences.length}
+        {#if $type === "summary" && sentences.length && $article}
             {#each sentences as sentence, i (`${$article.id}-${i}`)}
                 <div
                     in:fly={{duration:200, y:150, delay: 200}}
