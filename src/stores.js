@@ -8,7 +8,7 @@ export const article = writable(null);
 export const history = createHistory();
 export const user = derived(
 	jwt,
-	$jwt => { 
+	$jwt => {
         if($jwt) return JSON.parse(window.atob($jwt.split(".")[1]));
         else return {};
     }

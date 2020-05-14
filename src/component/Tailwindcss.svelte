@@ -6,7 +6,7 @@
   }
 
   input::placeholder {
-    @apply text-dark-3;
+    @apply text-dark-4;
   }
 
   .bt {
