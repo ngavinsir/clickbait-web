@@ -2,14 +2,14 @@
     <Bt 
         customClass="gray w-32 sm:w-40 mx-2 my-1 sm:mx-6" 
         on:click={() => sendLabel("NotClickbait")}
-        disabled={!article || loading}
+        disabled={!$article || loading}
         loading={loading === "NotClickbait"}
         value="Not Clickbait"
     />
     <Bt
         customClass="white w-32 sm:w-40 mx-2 my-1 sm:mx-6"
         on:click={() => sendLabel("Clickbait")}
-        disabled={!article || loading}
+        disabled={!$article || loading}
         loading={loading === "Clickbait"}
         value="Clickbait"
     />
