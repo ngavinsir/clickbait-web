@@ -1,5 +1,5 @@
 {#if $jwt}
-    <div class="fixed top-0 bg-dark-8 border-b-2 border-dark-7 w-screen p-4 px-6 flex items-center z-20 shadow-2xl">
+    <div class="fixed top-0 z-20 flex items-center w-screen p-4 px-6 border-b-2 shadow-2xl bg-dark-8 border-dark-7">
         <span 
             class={$type == "clickbait" ? "menu bg-accent-3 text-dark-9" : "menu"}
             on:click={() => {
@@ -22,7 +22,7 @@
             <span class="text-gray-100 cursor-pointer">{$user.name}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>
                 <button 
-                    class="w-full text-left px-4 py-2 text-white hover:underline flex items-center" 
+                    class="flex items-center w-full px-4 py-2 text-left text-white hover:underline" 
                     on:click={signout}
                 >
                     Sign out
@@ -31,12 +31,12 @@
         </div>
     </div>
 {:else if state}
-    <div class="fixed inset-0 w-screen h-screen flex justify-center items-center bg-dark-9 z-10 font-sans">
+    <div class="fixed inset-0 z-10 flex items-center justify-center w-screen h-screen font-sans bg-dark-9">
         <div class="flex flex-col items-center justify-center w-3/5 max-w-xs">
             {#if errorMessage}
-                <span class="mb-2 text-red-500 text-center max-w-xl">{errorMessage}</span>
+                <span class="max-w-xl mb-2 text-center text-red-500">{errorMessage}</span>
             {/if}
-            <form class="text-white w-full flex flex-col items-center">
+            <form class="flex flex-col items-center w-full text-white">
                 {#if state === "Login"}
                     <label class="flex flex-col w-full">
                         Email
@@ -44,7 +44,6 @@
                             id="email"
                             class="mb-4 shadow-md" 
                             bind:value={loginForm.email} type="text" 
-                            placeholder="email..." 
                             spellcheck="false"
                             on:keydown={handleKeydown}
                         />
@@ -55,7 +54,6 @@
                             class="mb-6 shadow-md" 
                             bind:value={loginForm.password} 
                             type="password" 
-                            placeholder="password..."
                             spellcheck="false"
                             on:keydown={handleKeydown}
                         />
@@ -66,7 +64,6 @@
                         <input
                             class="mb-4 shadow-md" 
                             bind:value={registerForm.name} type="text" 
-                            placeholder="name..." 
                             spellcheck="false"
                             on:keydown={handleKeydown}
                         />
@@ -76,7 +73,6 @@
                         <input
                             class="mb-4 shadow-md" 
                             bind:value={registerForm.email} type="text" 
-                            placeholder="email..." 
                             spellcheck="false"
                             on:keydown={handleKeydown}
                         />
@@ -87,13 +83,12 @@
                             class="mb-6 shadow-md" 
                             bind:value={registerForm.age} 
                             type="number" 
-                            placeholder="age..."
                             spellcheck="false"
                             on:keydown={handleKeydown}
                         />
                     </label>
                     <span class="self-start">Gender</span>
-                    <div class="flex flex-row mb-6 w-full">
+                    <div class="flex flex-row w-full mb-6">
                         <label class={genderClass(false, registerForm.is_male) + " mr-2"} for="female">
                             <input id="female" hidden type=radio bind:group={registerForm.is_male} value={false}>
                             Female
@@ -109,7 +104,6 @@
                             class="mb-6 shadow-md" 
                             bind:value={registerForm.password} 
                             type="password" 
-                            placeholder="password..."
                             spellcheck="false"
                             on:keydown={handleKeydown}
                         />
@@ -120,7 +114,6 @@
                             class="mb-6 shadow-md" 
                             bind:value={registerForm.confirmPassword} 
                             type="password" 
-                            placeholder="confirm password..."
                             spellcheck="false"
                             on:keydown={handleKeydown}
                         />
@@ -136,10 +129,10 @@
                 disabled={loading}
                 value={state}
             />
-            <span class="text-center mt-4 text-white font-base text-lg w-full" >
+            <span class="w-full mt-4 text-lg text-center text-white font-base" >
                 or 
                 <span 
-                    class="text-accent-3 cursor-pointer hover:underline" 
+                    class="cursor-pointer text-accent-3 hover:underline" 
                     on:click={() => {
                         state = isLogin ? "Register" : "Login"
                         errorMessage = ""
