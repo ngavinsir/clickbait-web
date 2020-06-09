@@ -1,4 +1,4 @@
-{#if showClickbaitGuide && $type == 'clickbait'}
+{#if showClickbaitGuide}
   <div 
     style={`transform: translate(${screenWidth > 640 ? '0' : '-50%'}, ${$clickbaitGuideSpring}px);`}
     class="fixed z-30 flex flex-col items-center w-11/12 max-w-xs p-4 rounded-lg clickbait-guide bg-accent-1"
@@ -47,12 +47,18 @@
     start();
   }
   $: show($onboardingStep);
-  $: showClickbaitGuide = $onboardingStep > contents.length && !$doneOnboarding;
+  $: showClickbaitGuide = $onboardingStep > contents.length && !$doneOnboarding && $type == 'clickbait';
+  $: if(showClickbaitGuide && !clickbaitGuideInterval) {
+    clickbaitGuideInterval = setInterval(() => {
+      clickbaitGuideSpring.set($clickbaitGuideSpring + clickbaitGuideMove);
+      console.log('interval');
+      clickbaitGuideMove *= -1;
+    }, 300);
+  } else if(clickbaitGuideInterval && !showClickbaitGuide) {
+    clearInterval(clickbaitGuideInterval);
+    clickbaitGuideInterval = null;
+  }
 
-  clickbaitGuideInterval = setInterval(() => {
-    clickbaitGuideSpring.set($clickbaitGuideSpring + clickbaitGuideMove);
-    clickbaitGuideMove *= -1;
-  }, 300);
   
   function start() {
     $onboardingStep = 1;
@@ -75,5 +81,9 @@
     })
   }
 
-  onDestroy(() => clearInterval(clickbaitGuideInterval));
+  onDestroy(() => {
+    if(clickbaitGuideInterval) {
+      clearInterval(clickbaitGuideInterval);
+    }
+  })
 </script>
