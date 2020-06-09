@@ -28,6 +28,10 @@ module.exports = {
     extend: {
       colors: customColor,
       placeholderColor: customColor
+    },
+    fontFamily: {
+      'sans': '"Source Sans Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+      'serif': 'Merriweather, Georgia, Cambria, "Times New Roman", Times, serif'
     }
   },
   variants: ['responsive', 'hover', 'focus', 'group-hover', 'even', 'last', 'disabled'],
