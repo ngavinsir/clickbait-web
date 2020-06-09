@@ -1,5 +1,6 @@
 {#if $type === "clickbait" || $showHistory}
-    <div class="flex flex-col">
+    <span class="font-bold text-gray-100">History</span>
+    <div class="flex flex-col mt-2">
         {#if sortedHistories.length}
             {#each sortedHistories as history,i (history.label.id)}
                 <div 
@@ -15,7 +16,7 @@
                 </div>
             {/each}
         {:else if loading}
-            <div class="py-4 self-center">
+            <div class="self-center py-4">
                 <Spinner  
                     size="50"
                     speed="750"
@@ -28,7 +29,7 @@
             <span
                 in:fly={{duration:150, y:50}}
                 out:fly={{duration:150, y:50}}
-                class="self-center pt-5 text-white font-bold opacity-50 sm:text-lg"
+                class="self-center pt-5 font-bold text-white opacity-50 sm:text-lg"
             >
                 There is no history...
             </span>
