@@ -1,4 +1,4 @@
-{#if showClickbaitGuide}
+{#if showClickbaitGuide && $type == 'clickbait'}
   <div 
     style={`transform: translate(${screenWidth > 640 ? '0' : '-50%'}, ${$clickbaitGuideSpring}px);`}
     class="fixed z-30 flex flex-col items-center w-11/12 max-w-xs p-4 rounded-lg clickbait-guide bg-accent-1"
@@ -30,7 +30,7 @@
   import Welcome from "./content/Welcome.svelte";  
   import Clickbait from "./content/Clickbait.svelte";
   import Example from "./content/Example.svelte";
-  import { jwt, onboardingStep, history, doneOnboarding } from "../../stores.js";
+  import { type, jwt, onboardingStep, history, doneOnboarding } from "../../stores.js";
   import { getContext, onDestroy } from "svelte";
   import { spring } from 'svelte/motion';
 
