@@ -41,30 +41,19 @@
   let clickbaitGuideInterval = null
   let clickbaitGuideMove = 10;
   let screenWidth;
-  let previousHistoryLength;
   let showClickbaitGuide = false;
 
   $: if($jwt && !$doneOnboarding) {
     start();
   }
   $: show($onboardingStep);
-  $: {
-    showClickbaitGuide = $onboardingStep > contents.length && !$doneOnboarding;
-    if(showClickbaitGuide) updatePreviousHistoryLength();
-  } 
-  $: if(!$doneOnboarding && $history.length > previousHistoryLength) {
-    $doneOnboarding = true;
-  }
+  $: showClickbaitGuide = $onboardingStep > contents.length && !$doneOnboarding;
 
   clickbaitGuideInterval = setInterval(() => {
     clickbaitGuideSpring.set($clickbaitGuideSpring + clickbaitGuideMove);
     clickbaitGuideMove *= -1;
   }, 300);
   
-  function updatePreviousHistoryLength() {
-    if(!previousHistoryLength) previousHistoryLength = $history.length;
-  }
-
   function start() {
     $onboardingStep = 1;
   }

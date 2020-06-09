@@ -43,7 +43,7 @@
 </div>
 
 <svelte:head>
-    <title>{headline}</title>
+  <title>{`${headline} | linguaksara`}</title>
 </svelte:head>
 <svelte:window on:keydown={handleKeydown}/>
 

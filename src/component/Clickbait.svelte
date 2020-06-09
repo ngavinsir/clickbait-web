@@ -20,7 +20,7 @@
 <script>
     import Bt from "./Button.svelte";
     import { getContext } from "svelte";
-    import { history, article } from "../stores.js";
+    import { history, article, doneOnboarding } from "../stores.js";
     import { slide } from "svelte/transition";
 
     const { axios } = getContext("axios");
@@ -46,6 +46,9 @@
                     article: $article,
                 })
                 $article = new_article;
+                if(!$doneOnboarding) {
+                    $doneOnboarding = true;
+                }
             }
         } catch (e) {
             console.log(e);
