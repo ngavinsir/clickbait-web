@@ -3,7 +3,7 @@
     transition:fly={{y:200, duration:300}} 
     class="fixed bottom-0 z-30 w-11/12 max-w-sm p-4 mb-20 bg-red-300 rounded-lg shadow-xl notification"
   >
-    <span class="text-center text-red-900">{notification}</span>
+    <span class="font-sans text-center text-red-900">{notification}</span>
   </div>
 {/if}
 <slot></slot>
