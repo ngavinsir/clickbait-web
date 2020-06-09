@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center w-full">
   {#if headline && renderHeadline}
     {#if loading}
       <div class="py-4">
@@ -11,29 +11,33 @@
         />
       </div>
     {:else}
-      <span class="w-full headline leading-tight font-serif">
+      <span class="w-full font-serif leading-tight headline">
         {headline}
       </span>
     {/if}
   {/if}
-  <div class="flex">
-    <span 
-      class="text-accent-3 my-4 font-bold text-sm cursor-pointer"
-      on:click={() => showContent = !showContent}
-    >
-      {`${showContent ? "HIDE" : "SHOW"} CONTENT`}
-    </span>
-    <button 
-      class="text-white ml-8 my-4 font-bold focus:outline-none text-sm cursor-pointer disabled:opacity-50 disabled:cursor-default"
-      on:click={getArticle}
-      disabled={loading}
-    >
-      SKIP
-    </button>
-  </div>
+  {#if !loading}
+    <div class="flex justify-end w-full">
+      {#if $article && $article.content}
+        <span 
+          class="my-4 mr-8 text-sm font-bold cursor-pointer text-accent-3"
+          on:click={() => showContent = !showContent}
+        >
+          {`${showContent ? "HIDE" : "SHOW"} CONTENT`}
+        </span>
+      {/if}
+      <button 
+        class="my-4 text-sm font-bold text-gray-200 cursor-pointer focus:outline-none disabled:opacity-50 disabled:cursor-default"
+        on:click={getArticle}
+        disabled={loading}
+      >
+        {headline == fallbackHeadline ? "RETRY" : "SKIP"}
+      </button>
+    </div>
+  {/if}
   {#if showContent}
     <div class="content-wrapper">
-      <p class="text-white mr-4">{$article && $article.content ? $article.content : "No content"}</p>
+      <p class="mr-4 text-white">{$article && $article.content ? $article.content : "No content"}</p>
     </div>
   {/if}
 </div>
@@ -49,6 +53,7 @@
     import { createEventDispatcher } from 'svelte';
     import { tick, beforeUpdate, getContext } from 'svelte';
 
+    const fallbackHeadline = "Can't find headline" 
     const { axios } = getContext("axios");
     const dispatch = createEventDispatcher();
 
@@ -61,38 +66,38 @@
     $: updateArticle($article);
 
     async function updateArticle(article) {
-      renderHeadline = false;
-      await tick();
-      headline = article && article.headline ? article.headline : "No headline"
-      renderHeadline = true;
+        renderHeadline = false;
+        await tick();
+        headline = article && article.headline ? article.headline : fallbackHeadline;
+        renderHeadline = true;
     }
 
     async function handleKeydown(event) {
-      if(event.keyCode === 13) await getArticle($jwt);
+        if(event.keyCode === 13) await getArticle($jwt);
     }
 
     async function getArticle(jwt) {
-      if(!$jwt || loading) return;
-      const timeout = setTimeout(() => {
-        loading = true
-      }, 100);
-      const url = `/${$type}/article/random`;
-      try {
-          const { data, data: { error } } = await axios.get(url);
-          $article = !error ? data : null;
-      } catch (e) {
-          console.log(e);
-          // handle get article error
-      } finally {
-        clearTimeout(timeout);
-        loading = false;
-      }
+        if(!$jwt || loading) return;
+        const timeout = setTimeout(() => {
+            loading = true
+        }, 100);
+        const url = `/${$type}/article/random`;
+        try {
+            const { data, data: { error } } = await axios.get(url);
+            $article = !error ? data : null;
+        } catch (e) {
+            console.log(e);
+            // handle get article error
+        } finally {
+            clearTimeout(timeout);
+            loading = false;
+        }
     }
 </script>
 
 <style type="text/postcss">
 .headline {
-    @apply text-gray-100 text-3xl text-center;
+    @apply text-white text-3xl text-center;
 }
 
 @screen sm {
