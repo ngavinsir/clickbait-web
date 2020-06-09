@@ -7,24 +7,25 @@
 	import Summary from "./component/Summary.svelte";
 	import Tailwindcss from './component/Tailwindcss.svelte';
 	import History from "./component/History.svelte";
+  import Notification from "./component/Notification.svelte";
 	import { jwt, type, history } from "./stores.js";
 
 	$: component = $type === "clickbait" ? Clickbait : $type === "summary" ? Summary : null;
 </script>
 
 <main>
-	<div class="min-w-screen min-h-full flex flex-col items-center font-sans leading-normal pt-20 pb-48">
+	<div class="flex flex-col items-center min-h-full pt-20 pb-48 font-sans leading-normal min-w-screen">
 		<Auth />
 		{#if $jwt}
-			<Axios><Modal>
+      <Notification><Axios><Modal>
 				<div class="flex flex-col items-center w-11/12 max-w-4xl">
 					<Article />
 					<svelte:component this={component} />
 				</div>
-				<div class="mt-8 w-11/12 max-w-screen-md">
+				<div class="w-11/12 mt-8 max-w-screen-md">
 					<History />
 				</div>
-			</Modal></Axios>
+      </Modal></Axios></Notification>
 		{/if}
 	</div>
 
