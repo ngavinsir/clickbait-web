@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center font-sans">
   <span class="text-xs font-bold text-dark-3">{`TUTORIAL - STEP ${step}`}</span> 
-  <span class="mt-3 mb-6 text-3xl font-bold leading-tight text-center text-white sm:text-4xl">{title}</span>
+  <span class="mt-3 mb-6 text-3xl font-bold leading-tight text-center text-white sm:text-5xl">{title}</span>
   <div class="sm:w-11/12">
     <slot></slot>
   </div>

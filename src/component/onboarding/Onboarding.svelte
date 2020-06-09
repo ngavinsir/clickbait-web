@@ -79,7 +79,7 @@
       closeOnEsc: false,
       closeOnOuterClick: false,
       styleWindow: {
-        backgroundColor: '#272727', 
+        backgroundColor: '#3d3d3d', 
         width: '425px',
         maxWidth: '100%'
       }
