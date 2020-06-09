@@ -1,6 +1,9 @@
 {#if showNotification}
-  <div transition:fly={{y:200, duration:500}} class="fixed bottom-0 z-30 p-4 mb-20 rounded-lg notification bg-accent-1">
-    <span class="text-center text-black">{notification}</span>
+  <div 
+    transition:fly={{y:200, duration:300}} 
+    class="fixed bottom-0 z-30 w-11/12 max-w-sm p-4 mb-20 bg-red-300 rounded-lg shadow-xl notification"
+  >
+    <span class="text-center text-red-900">{notification}</span>
   </div>
 {/if}
 <slot></slot>

@@ -148,11 +148,11 @@
 <svelte:window bind:scrollY={scrollY}/>
 
 <script>
-    import axios from "axios";
-    import cookie from "js-cookie";
+    import { getContext } from "svelte";
     import Bt from "./Button.svelte";
     import { jwt, user, type } from "../stores.js";
-    import config from "../config.js";
+
+    const { axios } = getContext("axios");
 
     let loginForm = {
         email: "",
@@ -178,7 +178,7 @@
 
     async function login() {
         loading = true;
-        const url = `${config.baseUrl}/login`;
+        const url = `/login`;
         try {
             const { data: token, data: { error } } = await axios.post(url, loginForm)
             if(!error) {
@@ -201,7 +201,7 @@
             return
         }
         loading = true;
-        const url = `${config.baseUrl}/register`;
+        const url = `/register`;
         try {
             const { data: token, data: { error } } = await axios.post(url, registerForm)
             if(!error) {

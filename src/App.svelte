@@ -20,10 +20,10 @@
 </svelte:head>
 
 <main>
+  <Notification><Axios><Modal>
 	<div class="flex flex-col items-center min-h-full pt-20 pb-48 font-sans leading-normal min-w-screen">
 		<Auth />
 		{#if $jwt}
-      <Notification><Axios><Modal>
         <Onboarding />
 				<div class="flex flex-col items-center w-11/12 max-w-4xl">
 					<Article />
@@ -32,9 +32,9 @@
 				<div class="w-11/12 mt-8 max-w-screen-md">
 					<History />
 				</div>
-      </Modal></Axios></Notification>
 		{/if}
 	</div>
+  </Modal></Axios></Notification>
 
 	<Tailwindcss />
 </main>
