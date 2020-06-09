@@ -8,16 +8,23 @@
 	import Tailwindcss from './component/Tailwindcss.svelte';
 	import History from "./component/History.svelte";
   import Notification from "./component/Notification.svelte";
+  import Onboarding from "./component/onboarding/Onboarding.svelte";
 	import { jwt, type, history } from "./stores.js";
 
 	$: component = $type === "clickbait" ? Clickbait : $type === "summary" ? Summary : null;
 </script>
+
+<svelte:head>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</svelte:head>
 
 <main>
 	<div class="flex flex-col items-center min-h-full pt-20 pb-48 font-sans leading-normal min-w-screen">
 		<Auth />
 		{#if $jwt}
       <Notification><Axios><Modal>
+        <Onboarding />
 				<div class="flex flex-col items-center w-11/12 max-w-4xl">
 					<Article />
 					<svelte:component this={component} />

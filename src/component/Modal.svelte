@@ -12,8 +12,6 @@
   export let setContext = baseSetContext;
   export let transitionBg = fade;
   export let transitionBgProps = { duration: 250 };
-  export let transitionWindow = transitionBg;
-  export let transitionWindowProps = transitionBgProps;
 
   const defaultState = {
     closeButton,
@@ -23,14 +21,13 @@
     styleWindow,
     styleContent,
     transitionBg,
-    transitionBgProps,
-    transitionWindow,
-    transitionWindowProps,
+    transitionBgProps
   };
   let state = { ...defaultState };
 
   let Component = null;
   let props = null;
+  let showWindow = false;
 
   let background;
   let wrap;
@@ -45,14 +42,14 @@
   $: cssWindow = toCssString(state.styleWindow);
   $: cssContent = toCssString(state.styleContent);
   $: currentTransitionBg = state.transitionBg;
-  $: currentTransitionWindow = state.transitionWindow;
 
-  const open = (
+  const open = async (
     NewComponent,
     newProps = {},
     options = {}
   ) => {
     Component = NewComponent;
+    showWindow = true;
     props = newProps;
     state = { ...defaultState, ...options };
   };
@@ -199,7 +196,7 @@
 
 {#if Component}
 <div
-    class="bg inset-0"
+    class="inset-0 bg"
     on:click={handleOuterClick}
     bind:this={background}
     transition:currentTransitionBg={state.transitionBgProps}
@@ -207,14 +204,13 @@
     <div class="window-wrap" bind:this={wrap}>
     <div
         class="window"
-        transition:currentTransitionWindow={state.transitionWindowProps}
         style={cssWindow}
     >
         {#if state.closeButton}
         <button on:click={close} class="close"></button>
         {/if}
         <div class="content" style={cssContent}>
-        <svelte:component this={Component} {...props}/>
+          <svelte:component this={Component} {...props} />
         </div>
     </div>
     </div>

@@ -13,6 +13,22 @@ export const user = derived(
         else return {};
     }
 );
+export const onboardingStep = writable(null);
+export const doneOnboarding = createDoneOnboarding();
+
+function createDoneOnboarding() {
+  const cookieDoneOnboarding = cookie.get("doneOnboarding"); 
+  const { subscribe, set } = writable(cookieDoneOnboarding ? cookieDoneOnboarding : false);
+
+  return {
+    subscribe,
+    set: (doneOnboarding) => {
+      set(doneOnboarding);
+      if(doneOnboarding) cookie.set("doneOnboarding", doneOnboarding)
+      else cookie.remove("doneOnboarding");
+    }
+  }
+}
 
 function createJwt() {
     const cookieExist = cookie.get("jwt") !== undefined && cookie.get("jwt");
