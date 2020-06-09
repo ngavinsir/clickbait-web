@@ -10,7 +10,8 @@
             baseURL: config.baseUrl,
             headers: {
                 Authorization: `Bearer ${$jwt}`
-            }
+	    },
+	    timeout: 2000
         });
     
     setContext("axios", {
