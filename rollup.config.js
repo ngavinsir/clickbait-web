@@ -28,7 +28,7 @@ export default {
 			preprocess: sveltePreprocess({ postcss: true })
 		}),
 		replace({
-			BASE_URL: process.env.BASE_URL || "http://localhost:4040"
+            BASE_URL: process.env.BASE_URL || "http://localhost:4040"
 		}),
 
 		// If you have external dependencies installed from
@@ -55,7 +55,8 @@ export default {
 		production && terser()
 	],
 	watch: {
-		clearScreen: false
+		clearScreen: false,
+        chokidar: false
 	}
 };
 
