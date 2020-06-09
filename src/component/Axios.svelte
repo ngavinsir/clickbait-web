@@ -6,7 +6,7 @@
     
     const { show: showNotification } = getContext("notification");
 
-    $: if($jwt) instance.defaults.headers.common['Authorization'] = `Bearer ${$jwt}`;
+    $: instance.defaults.headers['Authorization'] = `Bearer ${$jwt}`;
 
     const instance = axios.create({
       baseURL: config.baseUrl,
