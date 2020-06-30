@@ -93,7 +93,7 @@
         renderSentenceCount = false;
         selected = [];
         await tick();
-        sentences = article && article.content ? article.content.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|") : [];
+        sentences = article && article.content ? article.content.split("||") : [];
         renderSentenceCount = true;
     }
 
