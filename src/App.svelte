@@ -22,17 +22,17 @@
 
 <main>
   <Notification><Axios><Modal>
-	<div class="flex flex-col items-center min-h-full pt-20 pb-48 font-sans leading-normal min-w-screen">
+	<div class="flex flex-col items-center min-h-full font-sans leading-normal min-w-screen">
 		<Auth />
 		{#if $jwt}
-        <Onboarding />
-				<div class="flex flex-col items-center w-11/12 max-w-4xl">
-					<Article />
-					<svelte:component this={component} />
-				</div>
-				<div class="w-11/12 mt-8 max-w-screen-md">
-					<History />
-				</div>
+			<Onboarding />
+			<div class="flex flex-col items-center w-11/12 max-w-4xl pt-20 sm:pt-24">
+				<Article />
+				<svelte:component this={component} />
+			</div>
+			<div class="w-11/12 mt-8 max-w-screen-md pb-40">
+				<History />
+			</div>
 		{/if}
 	</div>
   </Modal></Axios></Notification>

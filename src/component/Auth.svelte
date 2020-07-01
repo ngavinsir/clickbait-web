@@ -31,8 +31,8 @@
         </div>
     </div>
 {:else if state}
-    <div class="fixed inset-0 z-10 flex items-center justify-center w-screen h-screen font-sans bg-dark-9">
-        <div class="flex flex-col items-center justify-center w-3/5 max-w-xs">
+    <div class="inset-0 z-10 flex items-center justify-center min-w-full min-h-screen font-sans bg-dark-9">
+        <div class="flex flex-col items-center justify-center w-3/5 max-w-xs py-4">
             {#if errorMessage}
                 <span class="max-w-xl mb-2 text-center text-red-500">{errorMessage}</span>
             {/if}
