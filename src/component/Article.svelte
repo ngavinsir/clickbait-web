@@ -37,7 +37,9 @@
   {/if}
   {#if showContent}
     <div class="content-wrapper">
-      <p class="mr-4 text-white">{$article && $article.content ? $article.content : "No content"}</p>
+      <p class="mr-4 text-white">
+        {$article && $article.content ? $article.content.split("||").join(" ") : "No content"}
+      </p>
     </div>
   {/if}
 </div>
