@@ -1,5 +1,14 @@
 <div class="flex items-center bg-dark-7 text-white rounded-lg shadow-xl px-4 py-4">
-    <span class="value text-left flex-grow leading-none">{data.article.headline}</span>
+    <div class="flex flex-col flex-grow">
+        <span class="value text-left leading-none">{data.article.headline}</span>
+        {#if data.keywords}
+            <div class="flex space-x-2 mt-2">
+                {#each data.keywords as keyword}
+                    <span class="bg-accent-3 text-dark-9 font-bold text-sm px-2 rounded-lg">{keyword}</span>
+                {/each}
+            </div>
+        {/if}
+    </div>
     {#if data.label.value == "Clickbait"} 
         <svg class="flex-shrink-0 ml-4" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="#F4B61D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -63,6 +63,7 @@
                         value: label,
                         updated_at: new Date().toISOString()
                     },
+                    keywords,
                     article: $article,
                 })
                 $article = new_article;
