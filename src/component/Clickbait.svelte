@@ -8,7 +8,7 @@
     />
     <Bt
         customClass="white w-32 sm:w-40 mx-2 my-1 sm:mx-6"
-        on:click={() => sendLabel("Clickbait")}
+        on:click={() => openClickbaitSelector()}
         disabled={!$article || loading}
         loading={loading === "Clickbait"}
         value="Clickbait"
@@ -19,20 +19,40 @@
 
 <script>
     import Bt from "./Button.svelte";
+    import ClickbaitSelector from "./ClickbaitSelector.svelte";
     import { getContext } from "svelte";
-    import { history, article, doneOnboarding } from "../stores.js";
+    import { history, article, doneOnboarding, modal } from "../stores.js";
     import { slide } from "svelte/transition";
 
     const { axios } = getContext("axios");
+    const { open: openModal, close: closeModal } = getContext("simple-modal");
     let loading = null;
 
-    async function sendLabel(label) {
+    $: if($modal && $modal.event == 'clickbaitSelector') {
+        closeModal();
+        sendLabel("Clickbait", $modal.payload);
+        $modal = null;
+    }
+
+    function openClickbaitSelector() {
+        openModal(ClickbaitSelector, {tokens: $article.headline.split(" ")}, {
+            closeButton: false,
+            styleWindow: {
+                backgroundColor: '#272727', 
+                width: '425px',
+                maxWidth: '100%'
+            }
+        })
+    } 
+
+    async function sendLabel(label, keywords) {
         if(loading) return;
         loading = label;
         const url = `/clickbait/labeling`;
         const data = {
             value: label,
-            article_id: $article.id
+            article_id: $article.id,
+            keywords
         };
         try {
             const { data: { error, label_id, new_article } } = await axios.post(url, data)
