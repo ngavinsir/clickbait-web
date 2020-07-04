@@ -5,6 +5,7 @@ export const jwt = createJwt();
 export const type = createType();
 export const showHistory = writable(false);
 export const article = writable(null);
+export const modal = writable(null);
 export const history = createHistory();
 export const user = derived(
 	jwt,
