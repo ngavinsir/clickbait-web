@@ -35,7 +35,7 @@
 </div>
 <div class="flex flex-col space-y-16 lg:flex-row lg:justify-center lg:space-x-32 bg-dark-8 items-center p-8 sm:p-20">
     <div class="flex flex-col items-center space-y-10">
-        <h1 class="text-4xl text-white font-serif font-bold text-center">Ingin membantu kami?</h1>
+        <h1 class="text-3xl sm:text-4xl text-white font-serif font-bold text-center">Ingin membantu kami?</h1>
         <p 
             class="text-base sm:text-xl text-gray-200 max-w-3xl lg:max-w-sm lg:self-start lg:text-left 
             text-center font-serif"
