@@ -1,9 +1,11 @@
 <script>
-	import { Router } from "@sveltech/routify";
-	import { routes } from "@sveltech/routify/tmp/routes";
 	import Axios from "./component/Axios.svelte";
 	import Notification from "./component/Notification.svelte";
 	import Modal from './component/Modal.svelte';
+	import Landing from './pages/index.svelte';
+	import App from './pages/app.svelte';
+	import { landing } from "./stores.js";
+
 </script>
 
 <svelte:head>
@@ -13,5 +15,9 @@
 </svelte:head>
 
 <Modal><Notification><Axios>
-	<Router {routes} />
+	{#if $landing}
+		<Landing />
+	{:else}
+		<App />
+	{/if}
 </Axios></Notification></Modal>

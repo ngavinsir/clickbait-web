@@ -31,7 +31,13 @@
         </div>
     </div>
 {:else if state}
-    <div class="inset-0 z-10 flex items-center justify-center min-w-full min-h-screen font-sans bg-dark-9">
+    <div class="inset-0 z-10 flex flex-col items-center justify-center min-w-full min-h-screen font-sans bg-dark-9">
+        <h1 
+            class="text-3xl sm:text-5xl text-accent-3 font-serif font-bold mb-6 cursor-pointer"
+            on:click={() => $landing = true}
+        >
+            linguaksara
+        </h1>
         <div class="flex flex-col items-center justify-center w-3/5 max-w-xs py-4">
             {#if errorMessage}
                 <span class="max-w-xl mb-2 text-center text-red-500">{errorMessage}</span>
@@ -150,7 +156,7 @@
 <script>
     import { getContext } from "svelte";
     import Bt from "./Button.svelte";
-    import { jwt, user, type } from "../stores.js";
+    import { jwt, user, type, landing } from "../stores.js";
 
     const { axios } = getContext("axios");
 

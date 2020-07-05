@@ -45,7 +45,13 @@
             dari headline/judul artikel yang telah kami kumpulkan dari berbagai media online di Indonesia. Hasil dari 
             pelabelan ini, diharapkan dapat membuat deteksi clickbait semakin akurat.
         </p>
-        <a href={$url('../app')} class="bt hover:bg-accent-7 px-8 py-4 font-bold font-sans">Mulai melabel</a>
+        <button 
+            class="bt hover:bg-accent-7 px-8 py-4 font-bold font-sans"
+            on:click={() => $landing = false}
+        >
+            Mulai melabel
+        </button>
+
     </div>
     <Leaderboard />
 </div>
@@ -57,6 +63,6 @@
 </style>
 
 <script>
-    import { url } from '@sveltech/routify';
     import Leaderboard from "../component/Leaderboard.svelte";
+    import { landing } from "../stores.js";
 </script>
