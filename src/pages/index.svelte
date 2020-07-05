@@ -33,15 +33,21 @@
         </span>
     </div>
 </div>
-<div class="flex flex-col bg-dark-8 items-center p-8 sm:p-20">
-    <h1 class="text-4xl text-white font-serif font-bold text-center">Ingin membantu kami?</h1>
-    <p class="text-base sm:text-xl mt-6 text-gray-200 max-w-3xl text-center font-serif">
-        Melalui website ini, kami meminta kesediaan anda untuk berpartisipasi dalam proses 
-        <span class="font-bold text-accent-3">anotasi/pelabelan</span>
-        dari headline/judul artikel yang telah kami kumpulkan dari berbagai media online di Indonesia. Hasil dari 
-        pelabelan ini, diharapkan dapat membuat deteksi clickbait semakin akurat.
-    </p>
-    <a href={$url('../app')} class="bt hover:bg-accent-7 mt-16 px-8 py-4 font-bold">Mulai melabel</a>
+<div class="flex flex-col space-y-16 lg:flex-row lg:justify-center lg:space-x-32 bg-dark-8 items-center p-8 sm:p-20">
+    <div class="flex flex-col items-center space-y-10">
+        <h1 class="text-4xl text-white font-serif font-bold text-center">Ingin membantu kami?</h1>
+        <p 
+            class="text-base sm:text-xl text-gray-200 max-w-3xl lg:max-w-sm lg:self-start lg:text-left 
+            text-center font-serif"
+        >
+            Melalui website ini, kami meminta kesediaan anda untuk berpartisipasi dalam proses 
+            <span class="font-bold text-accent-3">anotasi/pelabelan</span>
+            dari headline/judul artikel yang telah kami kumpulkan dari berbagai media online di Indonesia. Hasil dari 
+            pelabelan ini, diharapkan dapat membuat deteksi clickbait semakin akurat.
+        </p>
+        <a href={$url('../app')} class="bt hover:bg-accent-7 px-8 py-4 font-bold">Mulai melabel</a>
+    </div>
+    <Leaderboard />
 </div>
 
 <style type="text/postcss">
@@ -52,4 +58,5 @@
 
 <script>
     import { url } from '@sveltech/routify';
+    import Leaderboard from "../component/Leaderboard.svelte";
 </script>
