@@ -16,7 +16,7 @@
             />
         {:then leaderboards}
             {#each leaderboards as leaderboard, i}
-                <div class="flex">
+                <div class="flex w-full">
                     <span
                         class={`flex-grow ${(i+1)%2 == 0 ? 'text-accent-3' : 'text-gray-200'} font-sans text-lg`}
                     >
