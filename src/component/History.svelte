@@ -1,7 +1,7 @@
 {#if $type === "clickbait" || $showHistory}
     <span class="font-bold text-gray-100">History</span>
     <div class="flex flex-col mt-2">
-        {#if sortedHistories.length}
+        {#if !loading}
             {#each sortedHistories as history,i (history.label.id)}
                 <div 
                     in:fly={{duration:150, y:50}}
@@ -54,6 +54,7 @@
     let deleting = [];
     let loading = false;
     let cancelSource = null;
+    let sortedHistories = [];
 
     $: getHistories($type);
     $: sortedHistories = _.sortBy($history, function(label) {
@@ -67,7 +68,7 @@
             loading = true
         }, 100);
         cancelSource = cancel.CancelToken.source();
-        $history = [];
+        sortedHistories = [];
         await tick();
         const url = `/${type}/label`;
         try {
