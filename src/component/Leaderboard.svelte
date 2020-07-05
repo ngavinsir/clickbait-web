@@ -15,18 +15,22 @@
                 gap="40"
             />
         {:then leaderboards}
-            {#each leaderboards as leaderboard, i}
-                <div class="flex w-full">
-                    <span
-                        class={`flex-grow ${(i+1)%2 == 0 ? 'text-accent-3' : 'text-gray-200'} font-sans text-lg`}
-                    >
-                        {`${i+1}. ${leaderboard.name}`}
-                    </span>
-                    <span class={`${(i+1)%2 == 0 ? 'text-accent-3' : 'text-gray-200'} font-sans`}>
-                        {leaderboard.score}
-                    </span>
-                </div>
-            {/each}
+            {#if leaderboards.length}
+                {#each leaderboards as leaderboard, i}
+                    <div class="flex w-full">
+                        <span
+                            class={`flex-grow ${(i+1)%2 == 0 ? 'text-accent-3' : 'text-gray-200'} font-sans text-lg`}
+                        >
+                            {`${i+1}. ${leaderboard.name}`}
+                        </span>
+                        <span class={`${(i+1)%2 == 0 ? 'text-accent-3' : 'text-gray-200'} font-sans`}>
+                            {leaderboard.score}
+                        </span>
+                    </div>
+                {/each}
+            {:else}
+                <span class="text-dark-9 text-lg my-auto text-center">Belum ada peserta</span>
+            {/if}
         {:catch error}
             <span class="text-dark-9 text-lg my-auto text-center">Tidak dapat menghubungi server</span>
         {/await}
