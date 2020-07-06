@@ -9,7 +9,7 @@
         >
             Clickbait
         </span>
-        <span 
+        <!-- <span 
             class={$type == "summary" ? "menu bg-accent-3 text-dark-9 ml-4" : "menu ml-4"}
             on:click={() => {
                 scrollY = 0;
@@ -17,7 +17,7 @@
             }}
         >
             Summary
-        </span>
+        </span> -->
         <div class="relative ml-auto" on:mouseover={() => showDropdown = true} on:mouseout={() => showDropdown = false}>
             <span class="text-gray-100 cursor-pointer">{$user.name}</span>
             <div class={showDropdown ? "dropdown-wrapper" : "hidden"}>

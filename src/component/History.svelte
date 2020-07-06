@@ -15,6 +15,15 @@
                     />
                 </div>
             {/each}
+            {#if !cancelSource}
+                <span
+                    in:fly={{duration:150, y:50}}
+                    out:fly={{duration:150, y:50}}
+                    class="self-center pt-5 font-bold text-white opacity-50 sm:text-lg"
+                >
+                    There is no history...
+                </span>
+            {/if}
         {:else if loading}
             <div class="self-center py-4">
                 <Spinner  
@@ -25,14 +34,6 @@
                     gap="40"
                 />
             </div>
-        {:else if !cancelSource}
-            <span
-                in:fly={{duration:150, y:50}}
-                out:fly={{duration:150, y:50}}
-                class="self-center pt-5 font-bold text-white opacity-50 sm:text-lg"
-            >
-                There is no history...
-            </span>
         {/if}
     </div>
 {/if}
