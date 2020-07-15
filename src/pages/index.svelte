@@ -5,15 +5,15 @@
         secara otomatis dengan <i>Artificial Intelligence</i>
     </p>
 </div>
-<div class="flex flex-col sm:flex-row bg-dark-7 p-8 sm:p-16 justify-center space-y-16 md:space-x-16 lg:space-x-32">
+<div class="flex flex-col items-center md:flex-row bg-dark-7 p-8 sm:p-16 justify-center space-y-16 md:space-x-16 lg:space-x-32">
     <div class="flex flex-col">
-        <h1 class="font-bold text-white text-3xl font-serif">Apa itu clickbait?</h1>
-        <p class="mt-4 font-sans text-gray-300 max-w-sm text-xl">
+        <h1 class="font-bold text-white text-3xl font-serif text-center md:text-left">Apa itu clickbait?</h1>
+        <p class="mt-4 font-sans text-gray-300 md:max-w-sm text-xl">
             Clickbait merupakan sebuah cara untuk menarik pembaca atau web visitor dengan membuat judul artikel 
             yang menarik. Cara ini banyak digunakan media online dan fenomena-nya telah banyak ditemukan di 
             sosial media. 
         </p>
-        <p class="mt-3 font-sans text-gray-300 max-w-sm text-xl">
+        <p class="mt-3 font-sans text-gray-300 md:max-w-sm text-xl">
             Akan tetapi, clickbait sering disalahgunakan, karena judul artikel yang menarik seringkali tidak 
             relevan dengan isi berita atau berita yang disajikan tidak berisi fakta yang benar. Hal ini bisa 
             menyebabkan experience yang tidak menyenangkan dari sisi pembaca dan pada akhirnya mengurangi 
