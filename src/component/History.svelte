@@ -84,6 +84,7 @@
             clearTimeout(timeout);
             loading = false;
             cancelSource = null;
+            await tick();
         }
     }
 
