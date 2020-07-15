@@ -15,7 +15,7 @@
                     />
                 </div>
             {/each}
-            {#if !sortedHistories.length}
+            {#if !sortedHistories.length && !loading}
                 <span
                     in:fly={{duration:150, y:50}}
                     out:fly={{duration:150, y:50}}
@@ -24,7 +24,8 @@
                     There is no history...
                 </span>
             {/if}
-        {:else if loading}
+        {/if}
+        {#if loading}
             <div class="self-center py-4">
                 <Spinner  
                     size="50"
@@ -62,7 +63,6 @@
             return Date.parse(label.label.updated_at); 
         }).reverse();
     $: labelComponent = $type == "clickbait" ? ClickbaitLabel : $type == "summary" ? SummaryLabel : null;
-    $: console.log(sortedHistories);
 
     async function getHistories(type) {
         if (cancelSource) cancelSource.cancel();
@@ -70,7 +70,7 @@
             loading = true
         }, 100);
         cancelSource = cancel.CancelToken.source();
-        sortedHistories = [];
+        $history = [];
         await tick();
         const url = `/${type}/label`;
         try {
