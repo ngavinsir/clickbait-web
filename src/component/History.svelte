@@ -55,13 +55,14 @@
     let deleting = [];
     let loading = false;
     let cancelSource = null;
-    let sortedHistories = [];
+    let sortedHistories;
 
     $: getHistories($type);
     $: sortedHistories = _.sortBy($history, function(label) {
             return Date.parse(label.label.updated_at); 
         }).reverse();
     $: labelComponent = $type == "clickbait" ? ClickbaitLabel : $type == "summary" ? SummaryLabel : null;
+    $: console.log(sortedHistories);
 
     async function getHistories(type) {
         if (cancelSource) cancelSource.cancel();
@@ -84,7 +85,6 @@
             clearTimeout(timeout);
             loading = false;
             cancelSource = null;
-            await tick();
         }
     }
 
