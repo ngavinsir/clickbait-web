@@ -1,29 +1,27 @@
 {#if $type === "clickbait" || $showHistory}
     <span class="font-bold text-gray-100">History</span>
     <div class="flex flex-col mt-2">
-        {#if !loading}
-            {#each sortedHistories as history,i (history.label.id)}
-                <div 
-                    in:fly={{duration:150, y:50}}
-                    out:fly={{duration:150, y:50}}
-                    animate:flip={{duration:150}} class="mb-4 last:mb-0">
-                    <svelte:component 
-                        this={labelComponent} 
-                        data={history} 
-                        on:delete={e => deleteLabel(e.detail)}
-                        deleting={deleting.includes(history.label.id)}
-                    />
-                </div>
-            {/each}
-            {#if !sortedHistories.length && !loading}
-                <span
-                    in:fly={{duration:150, y:50}}
-                    out:fly={{duration:150, y:50}}
-                    class="self-center pt-5 font-bold text-white opacity-50 sm:text-lg"
-                >
-                    There is no history...
-                </span>
-            {/if}
+        {#each sortedHistories as history,i (history.label.id)}
+            <div 
+                in:fly={{duration:150, y:50}}
+                out:fly={{duration:150, y:50}}
+                animate:flip={{duration:150}} class="mb-4 last:mb-0">
+                <svelte:component 
+                    this={labelComponent} 
+                    data={history} 
+                    on:delete={e => deleteLabel(e.detail)}
+                    deleting={deleting.includes(history.label.id)}
+                />
+            </div>
+        {/each}
+        {#if !sortedHistories.length}
+            <span
+                in:fly={{duration:150, y:50}}
+                out:fly={{duration:150, y:50}}
+                class="self-center pt-5 font-bold text-white opacity-50 sm:text-lg"
+            >
+                There is no history...
+            </span>
         {/if}
         {#if loading}
             <div class="self-center py-4">
