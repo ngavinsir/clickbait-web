@@ -18,7 +18,7 @@
     instance.interceptors.response.use(
       response => {
         const { data } = response;
-        if(data.status === "Unauthorized" && data.error === "signature is invalid") $jwt = "";
+        if(data && data.status === "Unauthorized" && data.error === "signature is invalid") $jwt = "";
         return response;
       },
       (error) => {
