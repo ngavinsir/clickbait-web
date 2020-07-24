@@ -78,7 +78,7 @@
         if(event.keyCode === 13) await getArticle($jwt);
     }
 
-    async function getArticle(jwt) {
+    export async function getArticle(jwt) {
         if(!$jwt || loading) return;
         const timeout = setTimeout(() => {
             loading = true

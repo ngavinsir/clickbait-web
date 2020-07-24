@@ -20,11 +20,13 @@
 <script>
     import Bt from "./Button.svelte";
     import ClickbaitSelector from "./ClickbaitSelector.svelte";
-    import { getContext } from "svelte";
+    import { getContext, createEventDispatcher } from "svelte";
     import { history, article, doneOnboarding, modal } from "../stores.js";
     import { slide } from "svelte/transition";
+    const dispatch = createEventDispatcher();
 
     const { axios } = getContext("axios");
+    const { show: showNotification } = getContext("notification");
     const { open: openModal, close: closeModal } = getContext("simple-modal");
     let loading = null;
 
@@ -70,6 +72,9 @@
                 if(!$doneOnboarding) {
                     $doneOnboarding = true;
                 }
+            } else {
+                dispatch("retry");
+                showNotification("Terjadi kesalahan, silahkan coba lagi", 3000);
             }
         } catch (e) {
             console.log(e);
