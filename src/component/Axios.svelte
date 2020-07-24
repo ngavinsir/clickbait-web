@@ -16,8 +16,10 @@
       timeout: 5000
     });
     instance.interceptors.response.use(
-      config => {
-        return config;
+      response => {
+        const { data } = response;
+        if(data.status === "Unauthorized" && data.error === "signature is invalid") $jwt = "";
+        return response;
       },
       (error) => {
         if (error.code === 'ECONNABORTED') {
