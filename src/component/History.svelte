@@ -14,7 +14,7 @@
                 />
             </div>
         {/each}
-        {#if !sortedHistories.length}
+        {#if !sortedHistories.length && !loading}
             <span
                 in:fly={{duration:150, y:50}}
                 out:fly={{duration:150, y:50}}
